@@ -46,7 +46,7 @@ function Homepage({ userInfo, manageLogin }) {
           </div>
           <div className={styles.home_page_larger_star_svg}>
             <img
-              src="/src/assets/homepage_big_star.svg"
+              src="./src/assets/homepage_big_star.svg"
               className={styles.home_page_arrow_svg_show}
             />
           </div>
