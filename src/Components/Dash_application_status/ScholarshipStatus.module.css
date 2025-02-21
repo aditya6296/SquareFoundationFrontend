@@ -1,0 +1,126 @@
+/* Main container styling */
+.ScholarshipStatus_parent_container {
+  display: flex;
+}
+.container {
+  width: 100%;
+  /* max-width: 800px; */
+  margin: 40px auto;
+  padding: 0 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard_aside_container {
+  height: 100vh;
+  width: 260px;
+  background-color: rgba(245, 242, 255, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Sidebar Header */
+.dashboard_aside_header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dashboard_aside_header_name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Sidebar Links */
+.dashboard_aside_link_box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.dashboard_aside_link_home_btn,
+.dashboard_aside_link_application_btn,
+.dashboard_aside_link_logout_btn {
+  padding: 12px;
+  border: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.dashboard_aside_link_home_btn {
+  background-color: rgba(117, 48, 247, 1);
+  color: white;
+}
+
+.dashboard_aside_link_application_btn,
+.dashboard_aside_link_logout_btn {
+  background-color: rgba(245, 242, 255, 1);
+  color: black;
+}
+
+.dashboard_aside_link_home_btn:hover,
+.dashboard_aside_link_application_btn:hover,
+.dashboard_aside_link_logout_btn:hover {
+  opacity: 0.8;
+}
+
+/* Title */
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Table container */
+.tableContainer {
+  overflow-x: auto;
+}
+
+/* Table styling */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Table Header */
+.table th {
+  background-color: #5b3eda;
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+/* Table Data */
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
+}
+
+/* Highlighted Status */
+.statusInReview {
+  color: #e69b00;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+  .table th,
+  .table td {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

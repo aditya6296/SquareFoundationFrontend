@@ -1,0 +1,74 @@
+.success_main_container {
+  height: auto;
+  max-width: 90%;
+  border: 1px solid rgb(188, 187, 187);
+  border-radius: 20px;
+  text-align: center;
+  margin: 20px auto;
+  background-color: #f0eeee;
+  padding: 20px;
+}
+
+/* Larger screens */
+@media screen and (min-width: 768px) {
+  .success_main_container {
+    max-width: 60%;
+    padding: 28px;
+  }
+}
+
+/* Desktop screens */
+@media screen and (min-width: 1024px) {
+  .success_main_container {
+    max-width: 45%;
+  }
+}
+
+.clearButton {
+  float: right;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.clearButton:hover {
+  transition: 0.5s;
+}
+
+.success_right_img_container {
+  padding: 0 16px;
+}
+.success_right_img {
+  height: 100px;
+  width: 100px;
+}
+
+@media screen and (min-width: 768px) {
+  .success_right_img {
+    height: 130px;
+    width: 130px;
+  }
+}
+
+.success_close_img {
+  cursor: pointer;
+  padding: 20px 0;
+}
+
+.success_text_container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.success_text p {
+  padding: 8px 0;
+}
+
+/* Make text container responsive */
+@media screen and (min-width: 768px) {
+  .success_text_container {
+    gap: 16px;
+    padding: 20px;
+  }
+}

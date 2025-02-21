@@ -1,0 +1,159 @@
+/* .scholarpage_main_box {
+  height: 360px;
+  display: flex;
+  background-color: rgba(71, 22, 156, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.scholarpage_header_text_container {
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 60px;
+  margin: 0 auto;
+}
+
+.scholarpage_header_text_box {
+  font-size: 28px;
+  width: 36%;
+  padding: 40px 0;
+  border-right: 1px solid rgb(255, 255, 255);
+
+  .scholarpage_header_text_1 {
+    width: 340px;
+    text-align: justify;
+  }
+}
+
+.scholarpage_list_text_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  text-align: justify;
+  gap: 10px;
+  line-height: 1.6;
+}
+
+.scholarpage_list_text {
+  font-size: 16px;
+}
+.scholarpage_date {
+  margin: 0 16px;
+  font-size: 13px;
+} */
+
+/* second */
+
+.scholarpage_main_box {
+  height: 360px;
+  display: flex;
+  background-color: rgba(71, 22, 156, 1);
+  color: rgba(255, 255, 255, 1);
+  padding: 20px;
+}
+
+.scholarpage_header_text_container {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 60px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* Ensures wrapping on smaller screens */
+}
+
+.scholarpage_header_text_box {
+  font-size: 28px;
+  width: 36%;
+  padding: 40px 0;
+  border-right: 1px solid rgb(255, 255, 255);
+}
+
+.scholarpage_header_text_1 {
+  max-width: 340px;
+  text-align: justify;
+}
+
+.scholarpage_list_text_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: justify;
+  gap: 10px;
+  line-height: 1.6;
+}
+
+.scholarpage_list_text {
+  font-size: 16px;
+}
+
+.scholarpage_date {
+  margin: 0 16px;
+  font-size: 13px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .scholarpage_main_box {
+    height: auto;
+    padding: 20px;
+  }
+
+  .scholarpage_header_text_container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .scholarpage_header_text_box {
+    width: 100%;
+    border-right: none;
+    text-align: center;
+  }
+
+  .scholarpage_header_text_1 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .scholarpage_main_box {
+    padding: 15px;
+  }
+
+  .scholarpage_header_text_container {
+    gap: 20px;
+  }
+
+  .scholarpage_header_text_box {
+    font-size: 24px;
+  }
+
+  .scholarpage_list_text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scholarpage_main_box {
+    padding: 10px;
+  }
+
+  .scholarpage_header_text_container {
+    gap: 15px;
+  }
+
+  .scholarpage_header_text_box {
+    font-size: 20px;
+  }
+
+  .scholarpage_list_text {
+    font-size: 12px;
+  }
+
+  .scholarpage_date {
+    font-size: 12px;
+  }
+}

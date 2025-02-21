@@ -1,0 +1,186 @@
+/* .steps_page_main_container {
+  display: flex;
+  flex-direction: column;
+  height: 440px;
+}
+
+.steps_page_header {
+  width: 600px;
+  text-align: center;
+  margin: 48px auto;
+  .steps_page_header_text {
+    font-size: 37px;
+    font-weight: bolder;
+  }
+}
+
+.steps_page_box {
+  height: 260px;
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.steps_page_box_card {
+  width: 310px;
+  height: 100%;
+  border: 1px solid rgba(132, 83, 255, 1);
+
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgba(245, 242, 255, 1);
+}
+
+.steps_page_box_card_img {
+  height: 100px;
+  width: 150px;
+}
+
+.steps_page_box_card_para {
+  font-size: 15px;
+  padding: 0 12px;
+} */
+
+/* second */
+
+/* Main Container */
+/* Main Container */
+.steps_page_main_container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure it takes full viewport height */
+  padding: 60px 20px 20px; /* Extra top padding to avoid overlap */
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Header Section */
+.steps_page_header {
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto 48px;
+}
+
+.steps_page_header_text {
+  font-size: 37px;
+  font-weight: bolder;
+}
+
+/* Steps Box */
+.steps_page_box {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+  padding-top: 20px; /* Added padding to avoid overlap */
+}
+
+/* Individual Card */
+.steps_page_box_card {
+  width: 310px;
+  min-height: 260px;
+  border: 1px solid rgba(132, 83, 255, 1);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  background-color: rgba(245, 242, 255, 1);
+  padding: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.steps_page_box_card:hover {
+  transform: translateY(-5px);
+}
+
+/* Card Image */
+.steps_page_box_card_img {
+  height: 100px;
+  width: 150px;
+}
+
+/* Card Paragraph */
+.steps_page_box_card_para {
+  font-size: 15px;
+  padding: 0 12px;
+}
+
+/* Responsive Design */
+
+/* Medium Screens (Tablets) */
+@media (max-width: 1024px) {
+  .steps_page_box {
+    max-width: 90%;
+    gap: 15px;
+    padding-top: 30px; /* Adjusted padding */
+  }
+
+  .steps_page_box_card {
+    width: 45%;
+    min-height: 220px;
+  }
+
+  .steps_page_header_text {
+    font-size: 32px;
+  }
+}
+
+/* Small Screens (Tablets & Large Phones) */
+@media (max-width: 768px) {
+  .steps_page_box {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px; /* Increased spacing */
+  }
+
+  .steps_page_box_card {
+    width: 80%;
+    min-height: 200px;
+  }
+
+  .steps_page_header_text {
+    font-size: 28px;
+  }
+
+  .steps_page_box_card_para {
+    font-size: 14px;
+  }
+}
+
+/* Extra Small Screens (Phones) */
+@media (max-width: 480px) {
+  .steps_page_main_container {
+    /* padding: 80px 10px 20px; Increased top padding */
+    margin-top: 640px;
+  }
+
+  .steps_page_box_card {
+    width: 100%;
+    min-height: 180px;
+  }
+
+  .steps_page_header_text {
+    font-size: 24px;
+  }
+
+  .steps_page_box_card_para {
+    font-size: 13px;
+    padding: 0 10px;
+  }
+}
