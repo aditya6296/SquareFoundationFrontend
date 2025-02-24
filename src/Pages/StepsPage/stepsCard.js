@@ -1,6 +1,6 @@
-import steps1 from "/src/assets/steps1.svg";
-import steps2 from "/src/assets/steps_page_crad_2.svg";
-import steps3 from "/src/assets/steps_page_crad_3.svg";
+import steps1 from "../../assets/steps1.svg";
+import steps2 from "../../assets/steps_page_crad_2.svg";
+import steps3 from "../../assets/steps_page_crad_3.svg";
 
 export const stepsPageCardData = [
   {

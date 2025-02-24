@@ -1,11 +1,11 @@
 import styles from "./footer.module.css";
 import { Link } from "react-router";
 
-import footerHeaderlineImg from "/src/assets/line.svg";
-import footerYoutube from "/src/assets/footer_images/Youtube.svg";
-import footerInstagram from "/src/assets/footer_images/Instagram.svg";
-import footerTwitter from "/src/assets/footer_images/Twitter.svg";
-import footerFacebook from "/src/assets/footer_images/Facebook.svg";
+import footerHeaderlineImg from "../../assets/line.svg";
+import footerYoutube from "../../assets/footer_images/Youtube.svg";
+import footerInstagram from "../../assets/footer_images/Instagram.svg";
+import footerTwitter from "../../assets/footer_images/Twitter.svg";
+import footerFacebook from "../../assets/footer_images/facebook.svg";
 
 function Footer() {
   return (
