@@ -1,25 +1,30 @@
+import ambitionPageFirstObject from "/src/assets/first_OBJECTS.svg";
+import ambitionPageSecondObject from "/src/assets/second_OBJECTS.svg";
+import ambitionPageThirdObject from "/src/assets/third_OBJECTS.svg";
+import ambitionPageFourthObject from "/src/assets/fourth_OBJECTS.svg";
+
 export const ambitonPageCardData = [
   {
     id: 1,
-    url: "/src/assets/first_OBJECTS.svg",
+    url: ambitionPageFirstObject,
     title: "For School Graduates",
     class: "first_card",
   },
   {
     id: 2,
-    url: "/src/assets/second_OBJECTS.svg",
+    url: ambitionPageSecondObject,
     title: "For College Undergrades",
     class: "second_card",
   },
   {
     id: 3,
-    url: "/src/assets/third_OBJECTS.svg",
+    url: ambitionPageThirdObject,
     title: "Financial Aid",
     class: "third_card",
   },
   {
     id: 4,
-    url: "/src/assets/fourth_OBJECTS.svg",
+    url: ambitionPageFourthObject,
     title: "Education Support",
     class: "fourth_card",
   },

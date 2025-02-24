@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import Signup from "../SignUp/signup";
 import Login from "../LoginPage/login";
+import footerHeaderlineImg from "/src/assets/line.svg";
+
 function Navbar({ userInfo, manageLogin }) {
   const { isAuthenticated, email } = userInfo;
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -49,9 +51,9 @@ function Navbar({ userInfo, manageLogin }) {
             RE
           </h1>
           <div className={styles.nav_header_down_logo}>
-            <img src="/src/assets/line.svg" />
+            <img src={footerHeaderlineImg} />
             <span>FOUNDATION</span>
-            <img src="/src/assets/line.svg" />
+            <img src={footerHeaderlineImg} />
           </div>
         </div>
         <div></div>
@@ -86,7 +88,11 @@ function Navbar({ userInfo, manageLogin }) {
       {isLoginOpen ? (
         <div className={styles.model_3}>
           <div className={styles.model_4}>
-            <Login setisLoginOpen={setisLoginOpen} manageLogin={manageLogin} setIsSignUpOpen={setIsSignUpOpen}/>
+            <Login
+              setisLoginOpen={setisLoginOpen}
+              manageLogin={manageLogin}
+              setIsSignUpOpen={setIsSignUpOpen}
+            />
           </div>
         </div>
       ) : (

@@ -1,6 +1,12 @@
 import styles from "./footer.module.css";
 import { Link } from "react-router";
 
+import footerHeaderlineImg from "/src/assets/line.svg";
+import footerYoutube from "/src/assets/footer_images/Youtube.svg";
+import footerInstagram from "/src/assets/footer_images/Instagram.svg";
+import footerTwitter from "/src/assets/footer_images/Twitter.svg";
+import footerFacebook from "/src/assets/footer_images/Facebook.svg";
+
 function Footer() {
   return (
     <>
@@ -144,9 +150,9 @@ function Footer() {
               RE
             </h1>
             <div className={styles.footer_header_down_logo}>
-              <img src="/src/assets/line.svg" />
+              <img src={footerHeaderlineImg} />
               <span>FOUNDATION</span>
-              <img src="/src/assets/line.svg" />
+              <img src={footerHeaderlineImg} />
             </div>
             <p className={styles.footer_text}>
               Empowering talent, breaking barriers.
@@ -197,16 +203,16 @@ function Footer() {
 
             <div className={styles.footer_contack_information_box_social_icons}>
               <Link to="">
-                <img src="/src/assets/footer_images/Youtube.svg" />
+                <img src={footerYoutube} />
               </Link>
               <Link to="">
-                <img src="/src/assets/footer_images/Instagram.svg" />
+                <img src={footerInstagram} />
               </Link>
               <Link to="">
-                <img src="/src/assets/footer_images/Twitter.svg" />
+                <img src={footerTwitter} />
               </Link>
               <Link to="">
-                <img src="/src/assets/footer_images/Facebook.svg" />
+                <img src={footerFacebook} />
               </Link>
             </div>
           </div>
