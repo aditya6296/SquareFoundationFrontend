@@ -1,7 +1,7 @@
-import ambitionPageFirstObject from "/src/assets/first_OBJECTS.svg";
-import ambitionPageSecondObject from "/src/assets/second_OBJECTS.svg";
-import ambitionPageThirdObject from "/src/assets/third_OBJECTS.svg";
-import ambitionPageFourthObject from "/src/assets/fourth_OBJECTS.svg";
+import ambitionPageFirstObject from "../../assets/first_OBJECTS.svg";
+import ambitionPageSecondObject from "../../assets/second_OBJECTS.svg";
+import ambitionPageThirdObject from "../../assets/third_OBJECTS.svg";
+import ambitionPageFourthObject from "../../assets/fourth_OBJECTS.svg";
 
 export const ambitonPageCardData = [
   {

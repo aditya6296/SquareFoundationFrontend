@@ -185,3 +185,38 @@
   justify-content: center;
   z-index: 9999;
 }
+
+.passwordContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.passwordInput {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* Space for the icon */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.visibilityToggle {
+  position: absolute;
+  right: 10px;
+  top: 65%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.visibilityToggle img {
+  width: 20px;
+  height: 20px;
+}

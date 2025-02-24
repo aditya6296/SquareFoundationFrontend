@@ -4,7 +4,7 @@ import useSignUp from "../../hooks/useSignUp";
 import useOtp from "../../hooks/useOtp";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
-import { ClipLoader, FadeLoader } from "react-spinners"; // Import spinner
+import { FadeLoader } from "react-spinners"; // Import spinner
 
 // import SendverifyEmail from "../../hooks/verifyEmail";
 
@@ -12,6 +12,7 @@ function Signup({ setIsSignUpOpen }) {
   const [email, setEmail] = useState("");
   const [isPassword, setIsPassword] = useState("");
   const [resendTimer, setResendTimer] = useState(0);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -232,7 +233,7 @@ function Signup({ setIsSignUpOpen }) {
               onSubmit={handleSubmit}
             >
               <div className={styles.signup_page_input_email_container}>
-                <p>Email Address</p>
+                <label>Email Address</label>
                 <input
                   disabled={isOtpSent && email === otpSentEmail} // if otp already sent
                   type="email"
@@ -243,11 +244,11 @@ function Signup({ setIsSignUpOpen }) {
                   required
                 />
               </div>
-              <div className={styles.signup_page_input_password_container}>
-                <p>Password</p>
+              {/* <p>Password</p> */}
+              {/* <div className={styles.password_input_Container}>
                 <input
                   disabled={isOtpSent}
-                  type="password"
+                  type={visible ? "text" : "password"}
                   placeholder="Enter password"
                   onChange={(e) => {
                     validatePassword(e.target.value);
@@ -255,7 +256,48 @@ function Signup({ setIsSignUpOpen }) {
                   }}
                   className={styles.signup_page_input_password_container}
                 />
+                <button type="button" onClick={() => setVisible(!visible)}>
+                  {visible ? (
+                    <img src="/src/assets/signup_images/visibility_on.svg" />
+                  ) : (
+                    <img src="/src/assets/signup_images/visibility_off.svg" />
+                  )}
+                </button>
+              </div> */}
+
+              <div className={styles.passwordContainer}>
+                <label>Password</label>
+                <div className={styles.inputWrapper}>
+                  <input
+                    disabled={isOtpSent}
+                    type={visible ? "text" : "password"}
+                    placeholder="Enter password"
+                    onChange={(e) => {
+                      validatePassword(e.target.value);
+                      setIsPassword(e.target.value);
+                    }}
+                    className={styles.passwordInput}
+                  />
+                  <button
+                    type="button"
+                    className={styles.visibilityToggle}
+                    onClick={() => setVisible(!visible)}
+                  >
+                    {visible ? (
+                      <img
+                        src="/src/assets/signup_images/visibility_on.svg"
+                        alt="Show"
+                      />
+                    ) : (
+                      <img
+                        src="/src/assets/signup_images/visibility_off.svg"
+                        alt="Hide"
+                      />
+                    )}
+                  </button>
+                </div>
               </div>
+
               <div>
                 {isOtpSent ? (
                   <div>
