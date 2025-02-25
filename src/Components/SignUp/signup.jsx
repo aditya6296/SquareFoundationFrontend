@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { FadeLoader } from "react-spinners"; // Import spinner
 import rightSvg from "../../assets/signup_images/signup_pass_right.svg";
 import wrongSvg from "../../assets/signup_images/signup_pass_wrong.svg";
+import visibilitySvg from "../../assets/signup_images/visibility_on.svg";
+import unVisibleSvg from "../../assets/signup_images/visibility_off.svg";
 
 // import SendverifyEmail from "../../hooks/verifyEmail";
 
@@ -286,15 +288,9 @@ function Signup({ setIsSignUpOpen }) {
                     onClick={() => setVisible(!visible)}
                   >
                     {visible ? (
-                      <img
-                        src="/src/assets/signup_images/visibility_on.svg"
-                        alt="Show"
-                      />
+                      <img src={visibilitySvg} alt="Show" />
                     ) : (
-                      <img
-                        src="/src/assets/signup_images/visibility_off.svg"
-                        alt="Hide"
-                      />
+                      <img src={unVisibleSvg} alt="Hide" />
                     )}
                   </button>
                 </div>
@@ -380,12 +376,23 @@ function Signup({ setIsSignUpOpen }) {
                       key={key}
                       className={styles.signup_page_input_password_match_svg}
                     >
-                      <img
-                        src={
-                          passwordCriteria[key] ? { rightSvg } : { wrongSvg }
-                        }
-                        alt="Validation icon"
-                      />
+                      {passwordCriteria[key] ? (
+                        <img
+                          src={
+                            rightSvg
+                            // passwordCriteria[key] ? { rightSvg } : { wrongSvg }
+                          }
+                          alt="Validation icon"
+                        />
+                      ) : (
+                        <img
+                          src={
+                            wrongSvg
+                            // passwordCriteria[key] ? { rightSvg } : { wrongSvg }
+                          }
+                          alt="Validation icon"
+                        />
+                      )}
                       <p>{label}</p>
                     </div>
                   ))}
