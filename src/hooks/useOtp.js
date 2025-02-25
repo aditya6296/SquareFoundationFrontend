@@ -9,7 +9,7 @@ const useOtp = ({ setIsOtpSent }) => {
     setLoading(true); // Start loading
     try {
       const response = await fetch(
-        `${import.meta.env.REACT_APP_API_BASE_URL}/api/v1/auth/otp`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/otp`,
         {
           method: "POST",
           headers: {
