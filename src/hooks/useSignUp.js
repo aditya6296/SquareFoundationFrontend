@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
-const useSignUp = () => {
+const useSignUp = ({ handleSignUpSuccess }) => {
   const navigate = useNavigate();
   const registerUser = async ({ email, password, otp }) => {
     console.log("email ===>", email);
@@ -28,6 +28,7 @@ const useSignUp = () => {
       }
 
       toast.success("Register successfully ! Please Login");
+      handleSignUpSuccess();
       navigate("/");
 
       // Return the parsed response

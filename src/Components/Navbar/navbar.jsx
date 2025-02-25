@@ -21,6 +21,11 @@ function Navbar({ userInfo, manageLogin }) {
     // navigate("/login");
   };
 
+  const handleSignUpSuccess = () => {
+    setIsSignUpOpen(false); // Close the signup popup
+    setisLoginOpen(true); // Open the login popup
+  };
+
   return (
     <>
       {/* <nav className={styles.navbar}> */}
@@ -78,7 +83,10 @@ function Navbar({ userInfo, manageLogin }) {
       {isSignUpOpen ? (
         <div className={styles.model}>
           <div className={styles.model_2}>
-            <Signup setIsSignUpOpen={setIsSignUpOpen} />
+            <Signup
+              setIsSignUpOpen={setIsSignUpOpen}
+              handleSignUpSuccess={handleSignUpSuccess}
+            />
           </div>
         </div>
       ) : (
