@@ -5,6 +5,8 @@ import useOtp from "../../hooks/useOtp";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { FadeLoader } from "react-spinners"; // Import spinner
+import rightSvg from "../../assets/signup_images/signup_pass_right.svg";
+import wrongSvg from "../../assets/signup_images/signup_pass_wrong.svg";
 
 // import SendverifyEmail from "../../hooks/verifyEmail";
 
@@ -380,9 +382,7 @@ function Signup({ setIsSignUpOpen }) {
                     >
                       <img
                         src={
-                          passwordCriteria[key]
-                            ? "/src/assets/signup_images/signup_pass_right.svg"
-                            : "/src/assets/signup_images/signup_pass_wrong.svg"
+                          passwordCriteria[key] ? { rightSvg } : { wrongSvg }
                         }
                         alt="Validation icon"
                       />

@@ -14,9 +14,9 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
   const { login, loading } = useLogin({ manageLogin });
   const [newOtp, setNewOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  // const [showLoginPop, setShowLoginPop] = useState(false);
+  const [visible, setVisible] = useState(false);
 
-  // const openLoginPopup = () => showLoginPop(true);
+  // const [showLoginPop, setShowLoginPop] = useState(false);
 
   const { sendOtp } = useOtp({ setIsOtpSent });
   const { forgotCreatePassword } = useForgotPassword();
@@ -163,10 +163,27 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
                     <div>
                       <label>Enter New Password</label>
                       <input
-                        type="string"
+                        type={visible ? "text" : "password"}
                         placeholder="Create new Password"
                         onChange={(e) => setNewPassword(e.target.value)}
                       />
+                      <button
+                        type="button"
+                        className={styles.visibilityToggle}
+                        onClick={() => setVisible(!visible)}
+                      >
+                        {visible ? (
+                          <img
+                            src="/src/assets/signup_images/visibility_on.svg"
+                            alt="Show"
+                          />
+                        ) : (
+                          <img
+                            src="/src/assets/signup_images/visibility_off.svg"
+                            alt="Hide"
+                          />
+                        )}
+                      </button>
                     </div>
                   </div>
                 ) : (
@@ -212,10 +229,27 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
                 <div>
                   <label>Password</label>
                   <input
-                    type="password"
+                    type={visible ? "text" : "password"}
                     placeholder="Enter your password"
                     required
                   />
+                  <button
+                    type="button"
+                    className={styles.visibilityToggle}
+                    onClick={() => setVisible(!visible)}
+                  >
+                    {visible ? (
+                      <img
+                        src="/src/assets/signup_images/visibility_on.svg"
+                        alt="Show"
+                      />
+                    ) : (
+                      <img
+                        src="/src/assets/signup_images/visibility_off.svg"
+                        alt="Hide"
+                      />
+                    )}
+                  </button>
                 </div>
                 <div>
                   <button

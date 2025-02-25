@@ -14,11 +14,9 @@
 }
 
 .nav_header {
-  width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: .3px solid rgb(0, 255, 98); */
 }
 
 .nav_header_down_logo {
@@ -28,33 +26,31 @@
 }
 
 .nav_header_name {
-  font-size: 34px;
-  font-weight: bolder;
+  font-size: 36px;
+  font-weight: 900;
   color: rgba(0, 0, 0, 1);
+  /* letter-spacing: 2px; Adjust space between letters */
 }
 
 .nav_header_logo {
-  margin: 0px 2px -3px 2px;
+  margin: 0px 4px -2px 2px;
   justify-content: center;
   align-items: center;
   margin-left: -8px;
-  /* border: 0.2px solid black; */
-  /* margin: 0 8px; */
 }
 
 .nav_signup_container {
   display: flex;
-  gap: 8px;
-  margin: 5px 10px;
   justify-content: center;
   text-align: center;
   align-items: center;
+  gap: 12px;
 
   .nav_login {
     min-width: 120px;
     text-align: center;
     text-decoration: none;
-    padding: 8px 30px;
+    padding: 10px 30px;
     border: 1px solid rgba(208, 213, 221, 1);
     background-color: rgba(247, 248, 249, 1);
     border-radius: 6px;
@@ -67,11 +63,12 @@
     min-width: 120px;
     text-align: center;
     text-decoration: none;
-    border: 1px solid rgba(208, 213, 221, 1);
-    padding: 8px 30px;
+    border: 1px solid rgba(117, 48, 247, 1);
+    padding: 10px 30px;
     background-color: rgba(117, 48, 247, 1);
     border-radius: 6px;
     color: rgba(255, 255, 255, 1);
+    font-weight: 600;
     cursor: pointer;
   }
 }
@@ -80,26 +77,29 @@
   margin: 0 20px;
 }
 
+/* POP UP */
 .model {
-  position: fixed; /* Covers the full screen */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .model_2 {
-  width: 620px; /* Adjust width */
-  height: 87%;
-  background: white; /* Solid background for the pop-up */
-  /* padding: 20px; */
+  width: 620px;
+  background: white;
   opacity: 1;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  border-radius: 20px; /* Optional: Adds rounded corners */
+  border-radius: 20px;
+  position: relative;
+  /* padding: 20px; */
+  /* height: 87%; */
 }
 
 .model_3 {
@@ -130,14 +130,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  width: 50%; /* Adjust width */
-  /* height: 87%; */
-  background: white; /* Solid background for the pop-up */
-  /* padding: 20px; */
+  width: 50%;
+  background: white;
   opacity: 1;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  border-radius: 20px; /* Optional: Adds rounded corners */
+  border-radius: 20px;
+  /* height: 87%; */
+  /* padding: 20px; */
 }
 
 /* media query */
@@ -181,4 +180,3 @@
     padding: 10px;
   }
 }
-

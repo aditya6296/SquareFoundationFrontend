@@ -28,7 +28,8 @@ function Homepage({ userInfo, manageLogin }) {
                 <span className={styles.home_page_main_header_text_highlight}>
                   Investing
                 </span>{" "}
-                in Your Dreams {import.meta.env.VITE_NAME_OF_USER}
+                in Your Dreams
+                {/* {import.meta.env.VITE_NAME_OF_USER} */}
               </h1>
               <p className={styles.home_page_main_header_text_para}>
                 This foundation scholarship offers financial aasistance and the

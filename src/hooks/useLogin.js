@@ -39,9 +39,10 @@ const useLogin = ({ manageLogin }) => {
         // navigate("/");
       } else if (res.status === 400) {
         toast.error(data.message);
-        navigate("/signup");
+        setLoading(false);
       } else {
         toast.error(data.message);
+        setLoading(false);
       }
     } catch (err) {
       console.log(err.message);

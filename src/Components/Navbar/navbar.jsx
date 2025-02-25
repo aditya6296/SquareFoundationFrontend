@@ -68,7 +68,7 @@ function Navbar({ userInfo, manageLogin }) {
               Login
             </button>
             <button className={styles.nav_signup} onClick={handleSignUpOpen}>
-              Signup
+              Sign Up
             </button>
           </div>
         )}
