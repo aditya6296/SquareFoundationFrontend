@@ -8,13 +8,16 @@ const useOtp = ({ setIsOtpSent }) => {
     console.log(email, "email from sendOtp");
     setLoading(true); // Start loading
     try {
-      const response = await fetch("http://localhost:2200/api/v1/auth/otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, isResnd }),
-      });
+      const response = await fetch(
+        `${import.meta.env.REACT_APP_API_BASE_URL}/api/v1/auth/otp`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, isResnd }),
+        }
+      );
       const data = await response.json();
       console.log("SendOTP data ----->>>>>>", data);
 
