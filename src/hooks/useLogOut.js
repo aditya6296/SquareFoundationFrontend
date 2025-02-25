@@ -6,10 +6,13 @@ const useLogOut = () => {
 
   const logout = async () => {
     try {
-      const response = await fetch("http://localhost:2200/api/v1/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/logout`,
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
 
       console.log("logout response", response);
 

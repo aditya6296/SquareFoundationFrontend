@@ -10,14 +10,17 @@ const useLogin = ({ manageLogin }) => {
     console.log("Login--Password", password);
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:2200/api/v1/auth/login", {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/login`,
+        {
+          method: "POST",
+          credentials: "include",
+          body: JSON.stringify({ email, password }),
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
       const data = await res.json();
       if (res.status == 200) {
         console.log("data manage ", data.data.user);

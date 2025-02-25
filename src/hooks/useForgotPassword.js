@@ -10,7 +10,7 @@ const useForgotPassword = () => {
   }) => {
     try {
       const response = await fetch(
-        "http://localhost:2200/api/v1/auth/forgot-password",
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/forgot-password`,
         {
           method: "PUT",
           credentials: "include",

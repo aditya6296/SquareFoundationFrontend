@@ -9,13 +9,16 @@ const useSignUp = () => {
     try {
       console.log("hello body --->");
 
-      const response = await fetch("http://localhost:2200/api/v1/auth/signup", {
-        method: "POST",
-        body: JSON.stringify({ email, password, otp }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/signup`,
+        {
+          method: "POST",
+          body: JSON.stringify({ email, password, otp }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       console.log("signupdata===>>>>", data);
 
