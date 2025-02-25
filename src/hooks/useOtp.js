@@ -15,11 +15,13 @@ const useOtp = ({ setIsOtpSent }) => {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({ email, isResnd }),
         }
       );
       const data = await response.json();
       console.log("SendOTP data ----->>>>>>", data);
+      console.log("API BASE URL:", import.meta.env.VITE_API_BASE_URL);
 
       if (response.status === 201) {
         toast.success("OTP sent");
