@@ -47,7 +47,7 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
     // alert("Hi forgot");
 
     const response = await fetch(
-      "http://localhost:2200/api/v1/auth/check-email",
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/check-email`,
       {
         method: "POST",
         credentials: "include",
