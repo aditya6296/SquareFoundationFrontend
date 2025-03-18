@@ -33,6 +33,38 @@ const useLogOut = () => {
       console.log(err.message);
     }
   };
+
+  // Handle logout only if the user closes the tab or window
+  // const handleUnload = async (event) => {
+  //   const navigationEntries = performance.getEntriesByType("navigation");
+  //   const logOutType =
+  //     navigationEntries.length > 0 ? navigationEntries[0].type : null;
+
+  //   // ✅ Check if the user is closing the tab, NOT refreshing
+  //   if (logOutType !== "reload") {
+  //     event.preventDefault(); // This will show the default browser prompt
+  //     event.returnValue = "Are you sure you want to leave?"; // ✅ Default message (custom message not allowed)
+
+  //     // ✅ Logout request before closing
+  //     await logout(); // Call logout API
+  //   }
+  // };
+
+  // const handleUnload = async (event, {userInfo}) => {
+  //   if (userInfo.isAuthenticated) {
+  //     event.preventDefault();
+  //     event.returnValue = ""; // This is necessary for Chrome
+
+  //     const confirmationMessage = "Are you sure you want to leave?";
+  //     event.returnValue = confirmationMessage; // For older browsers
+
+  //     const confirmed = window.confirm(confirmationMessage);
+  //     if (confirmed) {
+  //       await logout();
+  //     }
+  //   }
+  // };
+
   return { logout };
 };
 

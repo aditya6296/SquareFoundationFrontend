@@ -26,6 +26,26 @@ function Navbar({ userInfo, manageLogin }) {
     setisLoginOpen(true); // Open the login popup
   };
 
+  // if (isSignUpOpen) {
+  //   document.body.style.overflow = "hidden"; // Disable scrolling
+  //   document.body.style.height = "100vh"; // Prevents height expansion
+  // } else {
+  //   document.body.style.overflow = "auto"; // Enable scrolling
+  //   document.body.style.height = "auto";
+  // }
+
+  if (isSignUpOpen || isLoginOpen) {
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+    document.body.style.height = "100%";
+  } else {
+    document.body.style.overflow = "auto";
+    document.body.style.position = "static";
+    document.body.style.width = "auto";
+    document.body.style.height = "auto";
+  }
+
   return (
     <>
       {/* <nav className={styles.navbar}> */}
@@ -64,8 +84,10 @@ function Navbar({ userInfo, manageLogin }) {
         <div></div>
         {isAuthenticated ? (
           <div>
-            <label className={styles.nav_header_user}>Hello! {email}</label>
-            <Link to="/dash">Go to DashBoard</Link>
+            <label className={styles.nav_header_user}>
+              Welcome! <span className={styles.nav_header_email}>{email}</span>
+            </label>
+            <Link to="/dashboard">Go to DashBoard</Link>
           </div>
         ) : (
           <div className={styles.nav_signup_container}>
@@ -100,6 +122,7 @@ function Navbar({ userInfo, manageLogin }) {
               setisLoginOpen={setisLoginOpen}
               manageLogin={manageLogin}
               setIsSignUpOpen={setIsSignUpOpen}
+              handleSignUpSuccess={handleSignUpSuccess}
             />
           </div>
         </div>

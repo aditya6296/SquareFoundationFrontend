@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
-const useForgotPassword = () => {
-  const navigate = useNavigate();
+const useForgotPassword = ({ handleSignUpSuccess }) => {
   const forgotCreatePassword = async ({
     email: isEmail,
     otp: newOtp,
@@ -29,7 +27,7 @@ const useForgotPassword = () => {
       console.log("----forgot-data---", data);
       if (response.ok && data.status === "Success") {
         toast.success("Password Reset Successfully ! Please Login");
-        navigate("/");
+        handleSignUpSuccess();
       }
     } catch (err) {
       console.log("forgot-error", err);

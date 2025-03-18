@@ -8,16 +8,19 @@ import ViewDetails from "./Components/ViewDetails/viewDetails";
 import DashBoard from "./Components/DashBoard/dashBoard";
 import SuccessFully from "./Components/SuccessPopUp/successFully";
 import { useState } from "react";
-// import ScholarshipStatus from "./Components/Dash_application_status/ScholarshipStatus";
 import ScholarshipForm from "./Components/Scholarship_Form/ScholarshipForm";
 import useIsAuthorized from "./hooks/useIsAuthurized";
+import DashForm from "./Components/Dash-form/dashForm";
+import PrivateRoute from "./hooks/privateRoute";
+// import ScholarshipStatus from "./Components/Dash_application_status/ScholarshipStatus";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({
     isAuthenticated: false,
     email: "",
   });
-  useIsAuthorized({ setUserInfo });
+  useIsAuthorized({ setUserInfo, setIsLoading });
 
   const manageLogin = ({ email }) => {
     console.log("user email >>>>>", email);
@@ -37,8 +40,16 @@ function App() {
           />
           <Route path="/signup" element={<Signup />} />
           <Route path="/detail" element={<ViewDetails />} />
-          <Route path="/dash" element={<DashBoard />} />
-          <Route path="/form" element={<ScholarshipForm />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute userInfo={userInfo} isLoading={isLoading}>
+                <DashBoard />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/dashboard/form" element={<ScholarshipForm />} />
+          <Route path="/form" element={<DashForm />} />
           <Route path="/success" element={<SuccessFully />} />
           {/* <Route path="/login" element={<Login manageLogin={manageLogin} />} /> */}
           {/* <Route path="/dash/status" element={<ScholarshipStatus />} /> */}

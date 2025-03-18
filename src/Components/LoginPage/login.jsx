@@ -6,8 +6,15 @@ import { FadeLoader } from "react-spinners"; // Import spinner
 import useOtp from "../../hooks/useOtp";
 import { toast } from "react-toastify";
 import useForgotPassword from "../../hooks/useForgotPassword";
+import rightSvg from "../../assets/signup_images/signup_pass_right.svg";
+import wrongSvg from "../../assets/signup_images/signup_pass_wrong.svg";
 
-function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
+function Login({
+  manageLogin,
+  setisLoginOpen,
+  setIsSignUpOpen,
+  handleSignUpSuccess,
+}) {
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [isEmail, setIsEmail] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -19,7 +26,37 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
   // const [showLoginPop, setShowLoginPop] = useState(false);
 
   const { sendOtp } = useOtp({ setIsOtpSent });
-  const { forgotCreatePassword } = useForgotPassword();
+  const { forgotCreatePassword } = useForgotPassword({ handleSignUpSuccess });
+
+  // Password criteria
+
+  const [passwordCriteria, setPasswordCriteria] = useState({
+    validPassword: false,
+    upper: false,
+    lower: false,
+    number: false,
+    specialChar: false,
+  });
+
+  const validatePassword = (password) => {
+    const newCriteria = {
+      validPassword: password.length >= 8,
+      upper: /[A-Z]/.test(password),
+      lower: /[a-z]/.test(password),
+      number: /[0-9]/.test(password),
+      specialChar: /[@$!%*?&]/.test(password),
+    };
+    setPasswordCriteria(newCriteria);
+    console.log("validate password ==> ", newCriteria);
+  };
+
+  const criteriaList = [
+    { key: "validPassword", label: "At least 8 characters" },
+    { key: "upper", label: "At least one uppercase letter" },
+    { key: "lower", label: "At least one lowercase letter" },
+    { key: "number", label: "At least one number" },
+    { key: "specialChar", label: "At least one special character" },
+  ];
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -70,6 +107,16 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
   };
 
   const handleCreateNewPassword = () => {
+    if (
+      !passwordCriteria.validPassword ||
+      !passwordCriteria.upper ||
+      !passwordCriteria.lower ||
+      !passwordCriteria.number ||
+      !passwordCriteria.specialChar
+    ) {
+      toast.error("Password does not meet the required criteria!");
+      return;
+    }
     forgotCreatePassword({
       email: isEmail, // error
       otp: newOtp,
@@ -91,8 +138,8 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
           </div>
         )}
 
-        <div className={styles.signup_page_image_container}>
-          <div className={styles.signup_page_image_text_container}>
+        <div className={styles.login_page_image_container}>
+          <div className={styles.login_page_image_text_container}>
             <h4>Square Foundation</h4>
             <div className={styles.signup_page_image_title_container}>
               <div className={styles.signup_page_image_title_first_container}>
@@ -121,7 +168,7 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
               </div>
             </div>
           </div>
-          <div className={styles.signup_page_women_image_container}>
+          <div className={styles.login_page_women_image_container}>
             <img
               src="/src/assets/signup_images/signup_women_image.svg"
               className={styles.signup_page_image}
@@ -130,7 +177,7 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
         </div>
 
         {isForgotPassword ? (
-          <>
+          <div className={styles.forgotPassMainContainer}>
             <div className={styles.login_from_header_txt}>
               <h3>Forgot Password</h3>
               <p>Enter your email to reset your password</p>
@@ -162,10 +209,21 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
                     </div>
                     <div>
                       <label>Enter New Password</label>
+
                       <input
                         type={visible ? "text" : "password"}
                         placeholder="Create new Password"
-                        onChange={(e) => setNewPassword(e.target.value)}
+                        className={`${styles.inputField} ${
+                          !passwordCriteria.validPassword && newPassword
+                            ? styles.inputError
+                            : ""
+                        }`}
+                        value={newPassword}
+                        onChange={(e) => {
+                          const password = e.target.value;
+                          setNewPassword(password);
+                          validatePassword(password);
+                        }}
                       />
                       <button
                         type="button"
@@ -185,24 +243,40 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
                         )}
                       </button>
                     </div>
+
+                    <>
+                      {criteriaList.map(({ key, label }) => (
+                        <div
+                          key={key}
+                          className={styles.login_page_input_password_match_svg}
+                        >
+                          {passwordCriteria[key] ? (
+                            <img src={rightSvg} alt="Validation icon" />
+                          ) : (
+                            <img src={wrongSvg} alt="Validation icon" />
+                          )}
+                          <p>{label}</p>
+                        </div>
+                      ))}
+                    </>
                   </div>
                 ) : (
                   ""
                 )}
               </>
               {isOtpSent ? (
-                <button type="button" onClick={handleCreateNewPassword}>
+                <button type="button" onClick={handleCreateNewPassword} className={styles.create_pass_btn}>
                   Create Password
                 </button>
               ) : (
                 <button type="submit">Reset Password</button>
               )}
               {/* <button type="submit">Reset Password</button> */}
-              <button type="button" onClick={() => setIsForgotPassword(false)}>
+              <button type="button" onClick={() => setIsForgotPassword(false)} className={styles.back_login_btn}>
                 Back to Login
               </button>
             </form>
-          </>
+          </div>
         ) : (
           <div className={styles.login_page_main_container}>
             <div className={styles.login_page_form_container}>
@@ -217,8 +291,7 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
                 <h3>Login with your email</h3>
               </div>
               <form onSubmit={handleLogin} className={styles.form_container}>
-                <div>
-                  {" "}
+                <div className={styles.emailContainer}>
                   <label>Email Address</label>
                   <input
                     type="email"
@@ -226,30 +299,34 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
                     name="email"
                   />
                 </div>
-                <div>
+
+                <div className={styles.passwordContainer}>
                   <label>Password</label>
-                  <input
-                    type={visible ? "text" : "password"}
-                    placeholder="Enter your password"
-                    required
-                  />
-                  <button
-                    type="button"
-                    className={styles.visibilityToggle}
-                    onClick={() => setVisible(!visible)}
-                  >
-                    {visible ? (
-                      <img
-                        src="/src/assets/signup_images/visibility_on.svg"
-                        alt="Show"
-                      />
-                    ) : (
-                      <img
-                        src="/src/assets/signup_images/visibility_off.svg"
-                        alt="Hide"
-                      />
-                    )}
-                  </button>
+                  <div className={styles.inputWrapper}>
+                    <input
+                      type={visible ? "text" : "password"}
+                      placeholder="Enter your password"
+                      required
+                      className={styles.passwordInput}
+                    />
+                    <button
+                      type="button"
+                      className={styles.visibilityToggle}
+                      onClick={() => setVisible(!visible)}
+                    >
+                      {visible ? (
+                        <img
+                          src="/src/assets/signup_images/visibility_on.svg"
+                          alt="Show"
+                        />
+                      ) : (
+                        <img
+                          src="/src/assets/signup_images/visibility_off.svg"
+                          alt="Hide"
+                        />
+                      )}
+                    </button>
+                  </div>
                 </div>
                 <div>
                   <button
@@ -257,14 +334,19 @@ function Login({ manageLogin, setisLoginOpen, setIsSignUpOpen }) {
                     className={styles.forgot_password_btn}
                     onClick={() => setIsForgotPassword(true)}
                   >
-                    Forgot Password
+                    Forgot Password?
                   </button>
                 </div>
-                <button>Countinue</button>
+                <button className={styles.continue_btn}>Countinue</button>
                 <div>
                   <p>
-                    Don't have an account?{" "}
-                    <button onClick={handleSignupOpen}>Signup</button>
+                    Don't have an account?
+                    <button
+                      className={styles.signUp_btn}
+                      onClick={handleSignupOpen}
+                    >
+                      Signup
+                    </button>
                   </p>
                 </div>
               </form>

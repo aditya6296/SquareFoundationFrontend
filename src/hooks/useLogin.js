@@ -28,7 +28,7 @@ const useLogin = ({ manageLogin }) => {
         setLoading(false);
         // manageLogin(data.data.user.email);
         manageLogin({ email: data.data.user.email });
-        navigate("/dash");
+        navigate("/dashboard");
 
         // if (data?.data?.user) {
         //   manageLogin(data.data.user); // Pass the full user object

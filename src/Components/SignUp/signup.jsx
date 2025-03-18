@@ -12,7 +12,7 @@ import unVisibleSvg from "../../assets/signup_images/visibility_off.svg";
 
 // import SendverifyEmail from "../../hooks/verifyEmail";
 
-function Signup({ setIsSignUpOpen,handleSignUpSuccess }) {
+function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
   const [email, setEmail] = useState("");
   const [isPassword, setIsPassword] = useState("");
   const [resendTimer, setResendTimer] = useState(0);
@@ -75,7 +75,7 @@ function Signup({ setIsSignUpOpen,handleSignUpSuccess }) {
   const [otpSentEmail, setOtpSentEmail] = useState(""); // for check already sent
   // const [isResend, setIsResend] = useState(false);
 
-  const { registerUser } = useSignUp({handleSignUpSuccess});
+  const { registerUser } = useSignUp({ handleSignUpSuccess });
   const { sendOtp, loading } = useOtp({ setIsOtpSent });
 
   const handleSubmit = (e) => {
@@ -425,6 +425,7 @@ function Signup({ setIsSignUpOpen,handleSignUpSuccess }) {
 
 Signup.propTypes = {
   setIsSignUpOpen: PropTypes.func.isRequired,
+  handleSignUpSuccess: PropTypes.func.isRequired,
 };
 
 export default Signup;

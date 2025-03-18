@@ -1,226 +1,68 @@
-/* * {
-  font-family: "Inter", serif;
-}
-
-.dashboard_main_container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
-.dashboard_aside_container {
-  height: 100vh;
-  width: 260px;
-  background-color: rgba(245, 242, 255, 1);
-  text-decoration: none;
-
-  .dashboard_aside_header {
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    padding: 20px;
-    margin: 0 auto;
-  }
-
-  .dashboard_aside_link {
-    text-decoration: none;
-  }
-
-  .dashboard_aside_header_name {
-    font-size: 30px;
-    font-weight: bolder;
-  }
-
-  .dashboard_aside_header_logo {
-    margin: 0px 2px -3px 2px;
-    justify-content: center;
-    align-items: center;
-    margin-left: -8px;
-  }
-
-  .dashboard_aside_header_down_logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .dashboard_aside_link_box {
-    display: flex;
-    flex-direction: column;
-    height: 480px;
-    justify-content: space-between;
-  }
-  .dashboard_aside_link {
-    display: flex;
-    flex-direction: column;
-
-    .dashboard_aside_link_home_btn {
-      padding: 12px;
-      background-color: rgba(117, 48, 247, 1);
-      color: white;
-      border: none;
-      font-size: 14px;
-      display: flex;
-      gap: 4px;
-      justify-content: center;
-      align-items: center;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    .dashboard_aside_link_application_btn {
-      padding: 12px;
-      background-color: rgba(245, 242, 255, 1);
-      border: none;
-      font-size: 14px;
-      display: flex;
-      gap: 4px;
-      justify-content: center;
-      align-items: center;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .dashboard_aside_link_svg {
-      height: 18px;
-      width: 18px;
-    }
-  }
-  .dashboard_aside_link_logout_btn {
-    padding: 12px;
-    background-color: rgba(245, 242, 255, 1);
-    border: none;
-    font-size: 14px;
-    display: flex;
-    gap: 4px;
-    justify-content: center;
-    align-items: center;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-}
-
-.dashboard_page_scholarship_list_container {
-  border: 1px solid black;
-  width: 100%;
-  padding: 20px;
-
-  .dashboard_page_scholarship_list_header {
-    font-size: 24px;
-    font-weight: bolder;
-    margin-bottom: 30px;
-    .dashboard_page_scholarship_list_text {
-    }
-  }
-
-  .dashboard_page_scholarship_list_card {
-    height: 360px;
-    border: 1px solid black;
-    width: 24%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(247, 248, 249, 1);
-    border-radius: 12px;
-
-    .dashboard_page_scholarship_list_card_img {
-      height: 130px;
-      width: 220px;
-    }
-
-    .dashboard_page_scholarship_list_card_text {
-      width: 220px;
-    }
-
-    .dashboard_page_scholarship_list_card_para {
-      font-size: 12px;
-      margin: 8px 0;
-    }
-
-    .dashboard_page_scholarship_list_card_date {
-      font-size: 11px;
-    }
-
-    .dashboard_page_scholarship_list_card_btn {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: 220px;
-
-      .dashboard_page_scholarship_list_card_detail_btn {
-        padding: 7px;
-        background-color: rgba(231, 234, 238, 1);
-        border: none;
-      }
-
-      .dashboard_page_scholarship_list_card_aaply_btn {
-        padding: 7px;
-        background-color: rgba(0, 0, 0, 1);
-        color: white;
-        border: none;
-      }
-    }
-  }
-} */
-
 /* second */
-
-* {
-  font-family: "Inter", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 /* 🟣 Dashboard Main Container */
 .dashboard_main_container {
   display: flex;
   height: 100vh;
   width: 100%;
+  overflow: hidden; /* Prevent scrolling of the whole page */
 }
 
 /* 🟣 Sidebar */
 .dashboard_aside_container {
   height: 100vh;
-  width: 260px;
+  /* width: 260px; */
+  /* width: 20%; */
+  /* width: 400px; */
   background-color: rgba(245, 242, 255, 1);
   display: flex;
   flex-direction: column;
-  padding: 20px;
   transition: all 0.3s ease-in-out;
+  position: sticky; /* Keep sidebar fixed */
+  top: 0; /* Stick to the top */
+  /* overflow: hidden;  */
 }
 
-/* Sidebar Header */
 .dashboard_aside_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.dashboard_aside_header_down_logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dashboard_aside_header_name {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 1);
+  letter-spacing: 2px;
+}
+
+.dashboard_aside_header_logo {
+  margin: 0px 2px -3px 2px;
+  justify-content: center;
+  align-items: center;
+  margin-left: -8px;
 }
 
 /* Sidebar Links */
 .dashboard_aside_link_box {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 320px;
   flex-grow: 1;
 }
 
 .dashboard_aside_link_home_btn,
-.dashboard_aside_link_application_btn,
-.dashboard_aside_link_logout_btn {
-  padding: 12px;
+.dashboard_aside_link_application_btn {
+  padding: 10px 56px;
   border: none;
   font-size: 14px;
   display: flex;
@@ -229,18 +71,25 @@
   gap: 8px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  color: black;
 }
 
-.dashboard_aside_link_home_btn {
-  /* background-color: rgba(117, 48, 247, 1); */
-  /* background-color: red; */
-  color: white;
+.dashboard_aside_link_logout_btn {
+  border: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  color: black;
+  /* padding: 10px 56px; */
 }
-
+.dashboard_aside_link_home_btn,
 .dashboard_aside_link_application_btn,
 .dashboard_aside_link_logout_btn {
   background-color: rgba(245, 242, 255, 1);
-  color: black;
 }
 
 .dashboard_aside_link_home_btn:hover,
@@ -249,60 +98,103 @@
   opacity: 0.8;
 }
 
+/* Loader */
+.loading_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.main_card {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
 /* 🟣 Main Dashboard Content */
 .dashboard_page_scholarship_list_container {
   flex-grow: 1;
-  padding: 20px;
+  padding: 28px;
+  height: 100vh;
   overflow-y: auto;
+}
+
+.dashboard_page_scholarship_list_text {
+  font-size: 34px;
 }
 
 /* Scholarship List Header */
 .dashboard_page_scholarship_list_header {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 25px;
+  font-weight: 900;
 }
 
 /* Scholarship Cards */
-.dashboard_page_scholarship_list_card_container {
+/* .dashboard_page_scholarship_list_card_container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-}
+} */
 
 .dashboard_page_scholarship_list_card {
-  width: 100%;
-  max-width: 280px;
-  padding: 15px;
+  max-width: 18.5rem;
+  padding: 16px;
   background-color: rgba(247, 248, 249, 1);
   border-radius: 12px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
   transition: transform 0.3s ease-in-out;
+  border: 1px solid rgb(158, 160, 162);
+  /* width: 20%; */
+  /* max-width: 15.8rem; */
+  /* gap: 30px; */
 }
 
 .dashboard_page_scholarship_list_card:hover {
   transform: translateY(-5px);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.1) 0px 30px 60px -30px;
 }
 
 .dashboard_page_scholarship_list_card_img {
   width: 100%;
-  max-width: 220px;
+  /* max-width: 220px; */
   height: auto;
 }
 
+.dashboard_page_scholarship_list_card_text {
+}
+
+.dashboard_page_scholarship_list_card_title {
+  text-align: left;
+}
+
 .dashboard_page_scholarship_list_card_para {
-  font-size: 14px;
+  font-size: 12px;
   color: #333;
+  text-justify: inter-word;
+  white-space: normal;
+  text-align: justify;
+  padding: 10px 0;
 }
 
 .dashboard_page_scholarship_list_card_date {
-  font-size: 12px;
+  font-size: 11px;
   color: #666;
+  margin: 0 6px;
+  text-align: left;
+  text-align: justify;
 }
 
 /* Card Buttons */
@@ -337,7 +229,7 @@
 
 /* Model Pop-UP */
 
-.model {
+.view_model {
   position: fixed; /* Covers the full screen */
   top: 0;
   left: 0;
@@ -351,12 +243,8 @@
 }
 
 .model_2 {
-  width: 60%;
+  width: 100%;
   height: 100%;
-  background: white;
-  padding: 20px;
-  opacity: 1;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   border-radius: 20px;
 }
 
@@ -490,4 +378,35 @@
 .active {
   background-color: #5b3eda;
   color: white;
+}
+
+/* Form pop up */
+
+.form_model {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.form_card_model {
+  /* width: 60%; */
+  max-width: 780px;
+  height: auto;
+  max-height: 80%;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-y: auto;
 }

@@ -1,15 +1,31 @@
 import { useState } from "react";
 import styles from "./dashBoard.module.css";
-import { dashData } from "./dashboardData.js";
 import { Link } from "react-router-dom";
 import ViewDetails from "../ViewDetails/viewDetails.jsx";
-import logout from "../../hooks/useLogOut.js";
 import useLogOut from "../../hooks/useLogOut.js";
+import DashForm from "../Dash-form/dashForm.jsx";
+import useScholarship from "../../hooks/useScholarship.js";
+import { FadeLoader } from "react-spinners";
+import { toast } from "react-toastify";
+import useApplyNow from "../../hooks/useApplyNow.js";
+// import useCheckForm from "../../hooks/useCheckForm.js";
+// import { dashData } from "./dashboardData.js";
+// import logout from "../../hooks/useLogOut.js";
 
 function DashBoard() {
   const [activeTab, setActiveTab] = useState("home");
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const {logout} = useLogOut()
+
+  const { scholarshipData, isLoading } = useScholarship();
+  const {
+    applyNow,
+    isFormOpen,
+    selectedScholarshipId,
+    setIsFormOpen,
+    checkResultData,
+  } = useApplyNow();
+  // console.log("checkResultData to dashboard : ", checkResultData);
+  const { logout } = useLogOut();
 
   const handleHome = () => {
     setActiveTab("home");
@@ -23,8 +39,6 @@ function DashBoard() {
     setIsDetailOpen(true);
   };
 
-  // const userLogout = logout;
-
   const handleLogout = async () => {
     try {
       await logout(); // ✅ Ensure it's executed properly
@@ -32,29 +46,20 @@ function DashBoard() {
       console.error("Logout failed:", error);
     }
     console.log("buttom clicked --> ");
+  };
 
-    // try {
-    //   const response = await fetch("http://localhost:2200/api/v1/auth/logout", {
-    //     method: "POST",
-    //     credentials: "include",
-    //   });
+  // const handleCheckUserInfo = () => {
+  // const { checkUserForm } = useCheckForm();
+  // };
 
-    //   if (response.ok) {
-    //     // Redirect to the login page or home page
-    //     alert("Logout Success");
-
-    //     // setUserInfo({
-    //     //   isAuthenticated:false,
-    //     // })
-    //     // navigate('/login');
-    //   } else {
-    //     console.error("Failed to log out.");
-    //     alert("Error logging out. Please try again.");
-    //   }
-    // } catch (err) {
-    //   console.error("Error during logout:", err);
-    //   alert("An error occurred. Please try again.");
-    // }
+  const handleApplyNow = async (scholarshipId) => {
+    try {
+      await applyNow(scholarshipId);
+      setIsFormOpen(true);
+    } catch (error) {
+      console.error("Error applying:", error);
+      toast.error("Failed to apply. Please try again.");
+    }
   };
 
   return (
@@ -62,7 +67,11 @@ function DashBoard() {
       <div className={styles.dashboard_main_container}>
         <aside className={styles.dashboard_aside_container}>
           <div className={styles.dashboard_aside_header}>
-            <Link to="/" className={styles.dashboard_aside_link}>
+            <Link
+              to="/"
+              className={styles.dashboard_aside_link}
+              style={{ textDecoration: "none" }}
+            >
               <h1 className={styles.dashboard_aside_header_name}>
                 SQU{" "}
                 <svg
@@ -138,12 +147,16 @@ function DashBoard() {
         <div className={styles.dashboard_page_scholarship_list_container}>
           {activeTab === "home" ? (
             <>
-              <div className={styles.dashboard_page_scholarship_list_header}>
+              <div>
                 <h2 className={styles.dashboard_page_scholarship_list_text}>
                   Scholarship List
                 </h2>
               </div>
-              {dashData.map((elem) => (
+              <div
+                className={styles.dashboard_page_scholarship_list_header}
+              ></div>
+              {/* {isLoading ? <p>Loading...</p> : scholarshipData === null || scholarshipData.length === 0 ? <p>No data available</p> : 
+              {scholarshipData.map((elem) => (
                 <div
                   className={styles.dashboard_page_scholarship_list_card}
                   key={elem.id}
@@ -202,17 +215,117 @@ function DashBoard() {
                     >
                       View Details
                     </button>
-                    <Link
+                    <button
                       to="/form"
                       className={
                         styles.dashboard_page_scholarship_list_card_aaply_btn
                       }
+                      onClick={() => setIsFormOpen(true)}
                     >
                       Apply Now
-                    </Link>
+                    </button>
                   </div>
                 </div>
               ))}
+            } */}
+              <div className={styles.main_card}>
+                {isLoading ? (
+                  <div className={styles.loading_overlay}>
+                    <FadeLoader size={50} color="white" />
+                  </div> // Show loading
+                ) : scholarshipData === null || scholarshipData.length === 0 ? (
+                  <p>No data available</p> // Show message if no data is available
+                ) : (
+                  scholarshipData.map((elem) => (
+                    // <div className={styles.main_card} >
+
+                    <div
+                      className={styles.dashboard_page_scholarship_list_card}
+                      key={elem.id}
+                    >
+                      <p>ID: {elem.scholarshipId}</p>
+                      <div
+                        className={
+                          styles.dashboard_page_scholarship_list_card_img
+                        }
+                      >
+                        <img
+                          src={
+                            elem.url ||
+                            "/src/assets/dashboard_images/cardimg.svg"
+                          } // Default image if URL is missing
+                          alt="Scholarship"
+                          className={
+                            styles.dashboard_page_scholarship_list_card_img
+                          }
+                        />
+                      </div>
+                      <div
+                        className={
+                          styles.dashboard_page_scholarship_list_card_text
+                        }
+                      >
+                        <h4
+                          className={
+                            styles.dashboard_page_scholarship_list_card_title
+                          }
+                        >
+                          {elem.title}
+                        </h4>
+                        <p
+                          className={
+                            styles.dashboard_page_scholarship_list_card_para
+                          }
+                        >
+                          {elem.description}
+                        </p>
+                        <label
+                          className={
+                            styles.dashboard_page_scholarship_list_card_date
+                          }
+                        >
+                          Start Date:{" "}
+                          <strong>{elem.startDate.split("T")[0]}</strong>
+                        </label>
+                        <label
+                          className={
+                            styles.dashboard_page_scholarship_list_card_date
+                          }
+                        >
+                          Deadline:{" "}
+                          <strong>{elem.endDate.split("T")[0]}</strong>
+                        </label>
+                      </div>
+                      <div
+                        className={
+                          styles.dashboard_page_scholarship_list_card_btn
+                        }
+                      >
+                        <button
+                          className={
+                            styles.dashboard_page_scholarship_list_card_detail_btn
+                          }
+                          onClick={handleDetail} // You can replace handleDetail with a function for viewing details
+                        >
+                          View Details
+                        </button>
+
+                        <button
+                          to="/form"
+                          className={
+                            styles.dashboard_page_scholarship_list_card_apply_btn
+                          }
+                          // onClick={() => setIsFormOpen(true)} // You can open the form when clicked
+                          onClick={() => handleApplyNow(elem.scholarshipId)}
+                        >
+                          Apply Now
+                        </button>
+                      </div>
+                    </div>
+                    // </div>
+                  ))
+                )}
+              </div>
             </>
           ) : (
             <div className={styles.ScholarshipStatus_parent_container}>
@@ -244,13 +357,24 @@ function DashBoard() {
         </div>
 
         {isDetailOpen ? (
-          <div className={styles.model}>
+          <div className={styles.view_model}>
             <div className={styles.model_2}>
               <ViewDetails setIsDetailOpen={setIsDetailOpen} />
             </div>
           </div>
         ) : (
           ""
+        )}
+        {isFormOpen && (
+          <div className={styles.form_model}>
+            <div className={styles.form_card_model}>
+              <DashForm
+                setIsFormOpen={setIsFormOpen}
+                scholarshipId={selectedScholarshipId}
+                checkResultData={checkResultData}
+              />
+            </div>
+          </div>
         )}
       </div>
     </>
