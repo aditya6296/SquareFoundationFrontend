@@ -7,7 +7,9 @@ const useScholarship = () => {
     setIsLoading(true); // Set loading to true when data fetching starts
     try {
       const response = await fetch(
-        "http://localhost:2200/api/v1/dashboard/scholarship-data",
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/api/v1/dashboard/scholarship-data`,
         {
           method: "GET",
           credentials: "include",

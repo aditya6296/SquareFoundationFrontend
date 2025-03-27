@@ -11,7 +11,9 @@ const useUploadFile = () => {
 
     try {
       const response = fetch(
-        `http://localhost:2200/api/v1/application-form/upload/${scholarshipId}`,
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/api/v1/application-form/upload/${scholarshipId}`,
         {
           method: "POST",
           credentials: "include",

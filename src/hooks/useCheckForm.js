@@ -3,7 +3,7 @@ const useCheckForm = () => {
     try {
       console.log("checking .......");
       const checkData = await fetch(
-        "http://localhost:2200/api/v1/application-form/status",
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/application-form/status`,
         {
           method: "GET",
           credentials: "include",

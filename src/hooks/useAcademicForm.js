@@ -6,7 +6,9 @@ const useAcademicForm = () => {
     console.log("scholarshipId at useAcademic : ", scholarshipId);
     try {
       const response = await fetch(
-        `http://localhost:2200/api/v1/application-form/academic-details/${scholarshipId}`,
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/api/v1/application-form/academic-details/${scholarshipId}`,
         {
           method: "POST",
           body: JSON.stringify({ ...formAcademicData, scholarshipId }),
@@ -20,7 +22,6 @@ const useAcademicForm = () => {
       console.log("formAcademicData- is--- ✅ ", data);
     } catch (err) {
       console.log(err, " and ", err.message);
-      
     }
   };
   return { academicDetail };

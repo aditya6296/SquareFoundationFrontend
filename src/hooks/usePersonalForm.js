@@ -11,7 +11,9 @@ const usePersonalForm = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:2200/api/v1/application-form/personal-details/${scholarshipId}`,
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/api/v1/application-form/personal-details/${scholarshipId}`,
         {
           method: "POST",
           body: JSON.stringify({ ...formPersonalData, scholarshipId }),

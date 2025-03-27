@@ -12,7 +12,9 @@ const useApplyNow = () => {
     try {
       // ✅ Step 1: Check if the ID exists in the database
       const checkResponse = await fetch(
-        `http://localhost:2200/api/v1/application-form/check/${scholarshipId}`,
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/api/v1/application-form/check/${scholarshipId}`,
         {
           method: "GET",
           credentials: "include",
@@ -44,7 +46,6 @@ const useApplyNow = () => {
     selectedScholarshipId,
     setIsFormOpen,
     checkResultData,
-    
   };
 };
 
