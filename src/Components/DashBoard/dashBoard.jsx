@@ -8,12 +8,17 @@ import useScholarship from "../../hooks/useScholarship.js";
 import { FadeLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import useApplyNow from "../../hooks/useApplyNow.js";
+import logoImg from "/src/assets/line.svg";
+import homeIcon from "/src/assets/dashboard_images/home.svg";
+import applicationIcon from "/src/assets/dashboard_images/application.svg";
+import logoutIcon from "/src/assets/dashboard_images/logout.svg";
+import scholarshipLogo from "/src/assets/dashboard_images/cardimg.svg";
 
 // import useCheckForm from "../../hooks/useCheckForm.js";
 // import { dashData } from "./dashboardData.js";
 // import logout from "../../hooks/useLogOut.js";
 
-function DashBoard({setUserInfo}) {
+function DashBoard({ setUserInfo }) {
   const [activeTab, setActiveTab] = useState("home");
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedScholarship, setSelectedScholarship] = useState(null);
@@ -116,9 +121,9 @@ function DashBoard({setUserInfo}) {
                 RE
               </h1>
               <div className={styles.dashboard_aside_header_down_logo}>
-                <img src="/src/assets/line.svg" />
+                <img src={logoImg} />
                 <span>Foundation</span>
-                <img src="/src/assets/line.svg" />
+                <img src={logoImg} />
               </div>
             </Link>
           </div>
@@ -132,7 +137,7 @@ function DashBoard({setUserInfo}) {
               >
                 {" "}
                 <img
-                  src="/src/assets/dashboard_images/home.svg"
+                  src={homeIcon}
                   className={styles.dashboard_aside_link_svg}
                 />
                 Homepage
@@ -145,7 +150,7 @@ function DashBoard({setUserInfo}) {
                 onClick={handleApplication}
               >
                 <img
-                  src="/src/assets/dashboard_images/application.svg"
+                  src={applicationIcon}
                   className={styles.dashboard_aside_link_svg}
                 />
                 Application
@@ -156,7 +161,7 @@ function DashBoard({setUserInfo}) {
               onClick={handleLogout}
             >
               <img
-                src="/src/assets/dashboard_images/logout.svg"
+                src={logoutIcon}
                 className={styles.dashboard_aside_link_svg}
               />
               LogOut
@@ -196,10 +201,7 @@ function DashBoard({setUserInfo}) {
                         }
                       >
                         <img
-                          src={
-                            elem.url ||
-                            "/src/assets/dashboard_images/cardimg.svg"
-                          } // Default image if URL is missing
+                          src={elem.url || { scholarshipLogo }} // Default image if URL is missing
                           alt="Scholarship"
                           className={
                             styles.dashboard_page_scholarship_list_card_img

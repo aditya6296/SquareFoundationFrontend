@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import Signup from "../SignUp/signup";
 import Login from "../LoginPage/login";
-import footerHeaderlineImg from "/src/assets/line.svg";
+import logoImg from "/src/assets/line.svg";
 
 function Navbar({ userInfo, manageLogin }) {
   const { isAuthenticated, email } = userInfo;
@@ -76,9 +76,9 @@ function Navbar({ userInfo, manageLogin }) {
             RE
           </h1>
           <div className={styles.nav_header_down_logo}>
-            <img src={footerHeaderlineImg} />
+            <img src={logoImg} />
             <span>FOUNDATION</span>
-            <img src={footerHeaderlineImg} />
+            <img src={logoImg} />
           </div>
         </div>
         <div></div>
