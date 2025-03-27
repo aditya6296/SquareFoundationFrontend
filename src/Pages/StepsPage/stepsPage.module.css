@@ -56,7 +56,6 @@
 .steps_page_main_container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure it takes full viewport height */
   padding: 60px 20px 20px; /* Extra top padding to avoid overlap */
   align-items: center;
   box-sizing: border-box;
@@ -66,12 +65,12 @@
 .steps_page_header {
   max-width: 600px;
   text-align: center;
-  margin: 0 auto 48px;
 }
 
 .steps_page_header_text {
   font-size: 37px;
   font-weight: bolder;
+  -webkit-text-stroke: 0.5px black;
 }
 
 /* Steps Box */
@@ -111,8 +110,8 @@
 
 /* Card Image */
 .steps_page_box_card_img {
-  height: 100px;
-  width: 150px;
+  /* height: 100px; */
+  /* width: 150px; */
 }
 
 /* Card Paragraph */

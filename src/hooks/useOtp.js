@@ -26,7 +26,6 @@ const useOtp = ({ setIsOtpSent }) => {
       if (response.status === 201) {
         toast.success("OTP sent");
         setIsOtpSent(true);
-        setLoading(false); // Spinner close
       } else {
         toast.error(data.message);
         console.log("data.message ==> ", data.message);
@@ -34,6 +33,8 @@ const useOtp = ({ setIsOtpSent }) => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false); // Always stop loading, even in case of error
     }
   };
 

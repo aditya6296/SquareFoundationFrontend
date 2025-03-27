@@ -47,7 +47,6 @@
 /* second */
 
 .scholarpage_main_box {
-  height: 360px;
   display: flex;
   background-color: rgba(71, 22, 156, 1);
   color: rgba(255, 255, 255, 1);
@@ -62,19 +61,21 @@
   text-align: center;
   gap: 60px;
   margin: 0 auto;
-  flex-wrap: wrap; /* Ensures wrapping on smaller screens */
+  flex-wrap: wrap;
 }
 
 .scholarpage_header_text_box {
-  font-size: 28px;
   width: 36%;
   padding: 40px 0;
   border-right: 1px solid rgb(255, 255, 255);
 }
 
 .scholarpage_header_text_1 {
+  font-size: 44px;
   max-width: 340px;
-  text-align: justify;
+  -webkit-text-stroke: 0.5px rgb(255, 255, 255);
+  font-weight: 900;
+  text-align: left;
 }
 
 .scholarpage_list_text_box {
@@ -82,8 +83,9 @@
   flex-direction: column;
   justify-content: center;
   text-align: justify;
-  gap: 10px;
-  line-height: 1.6;
+  gap: 12px;
+  line-height: 1.5;
+  margin: 12px 0;
 }
 
 .scholarpage_list_text {

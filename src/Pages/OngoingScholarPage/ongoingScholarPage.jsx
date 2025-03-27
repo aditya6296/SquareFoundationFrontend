@@ -8,7 +8,7 @@ function OngoingScholarPage() {
         <div className={styles.scholarpage_header_text_container}>
           <div className={styles.scholarpage_header_text_box}>
             <h2 className={styles.scholarpage_header_text_1}>
-              Ongoing Scholarships
+              Ongoing <br /> Scholarships
             </h2>
           </div>
           <div className={styles.scholarpage_list_text_box}>

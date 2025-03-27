@@ -2,7 +2,12 @@ import { toast } from "react-toastify";
 
 const useUploadFile = () => {
   const uploadFile = async (scholarshipId, formData) => {
-    console.log("isFile : ", formData);
+    console.log("fileupload data id  =====: ", scholarshipId);
+    // console.log("fileupload data =====: ", formData.get("file"));
+    console.log("Checking FormData contents:");
+    for (let pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
 
     try {
       const response = fetch(
@@ -11,13 +16,10 @@ const useUploadFile = () => {
           method: "POST",
           credentials: "include",
           body: formData,
-          headers: {
-            "Content-type": "application/json",
-          },
         }
       );
       const data = await response.json();
-      if (response.ok) {
+      if (response.status(201)) {
         toast.success("File uploaded successfully!");
         console.log("Upload response:", data);
       }

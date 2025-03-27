@@ -8,13 +8,16 @@ import useScholarship from "../../hooks/useScholarship.js";
 import { FadeLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import useApplyNow from "../../hooks/useApplyNow.js";
+
 // import useCheckForm from "../../hooks/useCheckForm.js";
 // import { dashData } from "./dashboardData.js";
 // import logout from "../../hooks/useLogOut.js";
 
-function DashBoard() {
+function DashBoard({setUserInfo}) {
   const [activeTab, setActiveTab] = useState("home");
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [selectedScholarship, setSelectedScholarship] = useState(null);
+  const [applyData, setApplyData] = useState([]);
 
   const { scholarshipData, isLoading } = useScholarship();
   const {
@@ -25,17 +28,34 @@ function DashBoard() {
     checkResultData,
   } = useApplyNow();
   // console.log("checkResultData to dashboard : ", checkResultData);
-  const { logout } = useLogOut();
+  const { logout } = useLogOut(setUserInfo);
 
   const handleHome = () => {
     setActiveTab("home");
   };
 
-  const handleApplication = () => {
+  const handleApplication = async () => {
     setActiveTab("application");
+
+    try {
+      const response = await fetch(
+        `http://localhost:2200/api/v1/application-status`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
+
+      const appliedData = await response.json();
+      console.log("Application Status Result :", appliedData.AppliedData);
+      setApplyData(appliedData.AppliedData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleDetail = () => {
+  const handleDetail = (scholarship) => {
+    setSelectedScholarship(scholarship);
     setIsDetailOpen(true);
   };
 
@@ -155,95 +175,21 @@ function DashBoard() {
               <div
                 className={styles.dashboard_page_scholarship_list_header}
               ></div>
-              {/* {isLoading ? <p>Loading...</p> : scholarshipData === null || scholarshipData.length === 0 ? <p>No data available</p> : 
-              {scholarshipData.map((elem) => (
-                <div
-                  className={styles.dashboard_page_scholarship_list_card}
-                  key={elem.id}
-                >
-                  <div
-                    className={styles.dashboard_page_scholarship_list_card_img}
-                  >
-                    <img
-                      src={elem.url}
-                      alt="Scholarship"
-                      className={
-                        styles.dashboard_page_scholarship_list_card_img
-                      }
-                    />
-                  </div>
-                  <div
-                    className={styles.dashboard_page_scholarship_list_card_text}
-                  >
-                    <h4
-                      className={
-                        styles.dashboard_page_scholarship_list_card_title
-                      }
-                    >
-                      {elem.heading}
-                    </h4>
-                    <p
-                      className={
-                        styles.dashboard_page_scholarship_list_card_para
-                      }
-                    >
-                      {elem.text}
-                    </p>
-                    <label
-                      className={
-                        styles.dashboard_page_scholarship_list_card_date
-                      }
-                    >
-                      Start Date: <strong>{elem.startDate}</strong>
-                    </label>
-                    <label
-                      className={
-                        styles.dashboard_page_scholarship_list_card_date
-                      }
-                    >
-                      Deadline: <strong>{elem.endDate}</strong>
-                    </label>
-                  </div>
-                  <div
-                    className={styles.dashboard_page_scholarship_list_card_btn}
-                  >
-                    <button
-                      className={
-                        styles.dashboard_page_scholarship_list_card_detail_btn
-                      }
-                      onClick={handleDetail}
-                    >
-                      View Details
-                    </button>
-                    <button
-                      to="/form"
-                      className={
-                        styles.dashboard_page_scholarship_list_card_aaply_btn
-                      }
-                      onClick={() => setIsFormOpen(true)}
-                    >
-                      Apply Now
-                    </button>
-                  </div>
-                </div>
-              ))}
-            } */}
+
               <div className={styles.main_card}>
                 {isLoading ? (
                   <div className={styles.loading_overlay}>
                     <FadeLoader size={50} color="white" />
                   </div> // Show loading
                 ) : scholarshipData === null || scholarshipData.length === 0 ? (
-                  <p>No data available</p> // Show message if no data is available
+                  <p>No data available !</p> // Show message if no data is available
                 ) : (
                   scholarshipData.map((elem) => (
-                    // <div className={styles.main_card} >
-
                     <div
                       className={styles.dashboard_page_scholarship_list_card}
                       key={elem.id}
                     >
-                      <p>ID: {elem.scholarshipId}</p>
+                      {/* <p>ID: {elem.scholarshipId}</p> */}
                       <div
                         className={
                           styles.dashboard_page_scholarship_list_card_img
@@ -305,7 +251,7 @@ function DashBoard() {
                           className={
                             styles.dashboard_page_scholarship_list_card_detail_btn
                           }
-                          onClick={handleDetail} // You can replace handleDetail with a function for viewing details
+                          onClick={() => handleDetail(elem)} // You can replace handleDetail with a function for viewing details
                         >
                           View Details
                         </button>
@@ -328,6 +274,7 @@ function DashBoard() {
               </div>
             </>
           ) : (
+            // Application Status
             <div className={styles.ScholarshipStatus_parent_container}>
               <div className={styles.container}>
                 <h2 className={styles.title}>Scholarship Status</h2>
@@ -342,12 +289,16 @@ function DashBoard() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Bright Futures Scholarship</td>
-                        <td>BF20250123</td>
-                        <td>March 10, 2025</td>
-                        <td className={styles.statusInReview}>In Review</td>
-                      </tr>
+                      {applyData.map((elem, index) => (
+                        <tr key={index}>
+                          <td>
+                            {elem.application[0].scholarshipTitle || "N/A"}
+                          </td>
+                          <td>{elem.application[0].applicationId || "N/A"}</td>
+                          <td>{elem.createdAt.split("T")[0] || "N/A"}</td>
+                          <td className={styles.statusInReview}>In Review</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -359,7 +310,10 @@ function DashBoard() {
         {isDetailOpen ? (
           <div className={styles.view_model}>
             <div className={styles.model_2}>
-              <ViewDetails setIsDetailOpen={setIsDetailOpen} />
+              <ViewDetails
+                setIsDetailOpen={setIsDetailOpen}
+                scholarshipData={selectedScholarship}
+              />
             </div>
           </div>
         ) : (

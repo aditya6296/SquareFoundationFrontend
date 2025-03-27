@@ -269,7 +269,7 @@ function Login({
                   Create Password
                 </button>
               ) : (
-                <button type="submit">Reset Password</button>
+                <button type="submit" className={styles.create_pass_btn}>Reset Password</button>
               )}
               {/* <button type="submit">Reset Password</button> */}
               <button type="button" onClick={() => setIsForgotPassword(false)} className={styles.back_login_btn}>

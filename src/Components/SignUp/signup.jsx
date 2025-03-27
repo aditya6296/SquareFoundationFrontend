@@ -85,10 +85,13 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
 
     const isvalidPassword = Object.values(passwordCriteria).every(Boolean);
 
-    if (!email || !isvalidPassword) {
-      toast.error(
-        "Please enter a valid email and meet all password requirements."
-      );
+    if (!email) {
+      toast.error("Please enter a valid email !");
+      return;
+    }
+
+    if (!isvalidPassword) {
+      toast.error("Please enter meet all password requirements !");
       return;
     }
 
@@ -137,7 +140,7 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
   const handleResend = () => {
     if (resendTimer === 0) {
       sendOtp({ email, isResnd: true });
-      setResendTimer(120);
+      setResendTimer(60);
     }
   };
 
@@ -248,26 +251,6 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
                   required
                 />
               </div>
-              {/* <p>Password</p> */}
-              {/* <div className={styles.password_input_Container}>
-                <input
-                  disabled={isOtpSent}
-                  type={visible ? "text" : "password"}
-                  placeholder="Enter password"
-                  onChange={(e) => {
-                    validatePassword(e.target.value);
-                    setIsPassword(e.target.value);
-                  }}
-                  className={styles.signup_page_input_password_container}
-                />
-                <button type="button" onClick={() => setVisible(!visible)}>
-                  {visible ? (
-                    <img src="/src/assets/signup_images/visibility_on.svg" />
-                  ) : (
-                    <img src="/src/assets/signup_images/visibility_off.svg" />
-                  )}
-                </button>
-              </div> */}
 
               <div className={styles.passwordContainer}>
                 <label>Password</label>
@@ -314,10 +297,7 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
                       {resendTimer > 0
                         ? `Resend OTP (${resendTimer}s)`
                         : "Resend OTP"}
-
-                      {/* Resend OTP {resendTimer > 0 && `(${resendTimer}s)`} */}
                     </button>
-                    {/* <label>{`(${resendTimer}s)`}</label> */}
                   </div>
                 ) : (
                   ""
@@ -327,71 +307,22 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
                 className={styles.signup_page_input_password_match_container}
               >
                 <h4>Password must have</h4>
-                {/* <>
-                  <div className={styles.signup_page_input_password_match_svg}>
-                    {validPassword ? (
-                      <img src="/src/assets/signup_images/signup_pass_right.svg" />
-                    ) : (
-                      <img src="/src/assets/signup_images/signup_pass_wrong.svg" />
-                    )}
-                    <p>At least 8 characters</p>
-                  </div>
-                  <div className={styles.signup_page_input_password_match_svg}>
-                    {upperPasswordMatch ? (
-                      <img src="/src/assets/signup_images/signup_pass_right.svg" />
-                    ) : (
-                      <img src="/src/assets/signup_images/signup_pass_wrong.svg" />
-                    )}
-                    <p>At least one uppercase letter</p>
-                  </div>
-                  <div className={styles.signup_page_input_password_match_svg}>
-                    {lowerPasswordMatch ? (
-                      <img src="/src/assets/signup_images/signup_pass_right.svg" />
-                    ) : (
-                      <img src="/src/assets/signup_images/signup_pass_wrong.svg" />
-                    )}
-                    <p>At least one lowercase letter</p>
-                  </div>
-                  <div className={styles.signup_page_input_password_match_svg}>
-                    {numberPasswordMatch ? (
-                      <img src="/src/assets/signup_images/signup_pass_right.svg" />
-                    ) : (
-                      <img src="/src/assets/signup_images/signup_pass_wrong.svg" />
-                    )}
-                    <p>At least one number</p>
-                  </div>
-                  <div className={styles.signup_page_input_password_match_svg}>
-                    {specialCharPasswordMatch ? (
-                      <img src="/src/assets/signup_images/signup_pass_right.svg" />
-                    ) : (
-                      <img src="/src/assets/signup_images/signup_pass_wrong.svg" />
-                    )}
-                    <p>At least one special character</p>
-                  </div>
-                </> */}
 
                 <>
+                  {/* Not working if password match then close */}
                   {criteriaList.map(({ key, label }) => (
                     <div
                       key={key}
-                      className={styles.signup_page_input_password_match_svg}
+                      className={
+                        passwordCriteria
+                          ? styles.signup_page_input_password_match_svg
+                          : styles.signup_page_input_password_checker
+                      }
                     >
                       {passwordCriteria[key] ? (
-                        <img
-                          src={
-                            rightSvg
-                            // passwordCriteria[key] ? { rightSvg } : { wrongSvg }
-                          }
-                          alt="Validation icon"
-                        />
+                        <img src={rightSvg} alt="Validation icon" />
                       ) : (
-                        <img
-                          src={
-                            wrongSvg
-                            // passwordCriteria[key] ? { rightSvg } : { wrongSvg }
-                          }
-                          alt="Validation icon"
-                        />
+                        <img src={wrongSvg} alt="Validation icon" />
                       )}
                       <p>{label}</p>
                     </div>
@@ -414,7 +345,6 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
                   Send OTP
                 </button>
               )}
-              {/* <button className={styles.signup_page_form_btn}>Send OTP</button> */}
             </form>
           </div>
         </div>

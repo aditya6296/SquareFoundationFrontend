@@ -12,7 +12,7 @@ function PrivateRoute({ userInfo, children, isLoading }) {
   }
   console.log("Private Route :");
 
-  return userInfo.isAuthenticated ? children : <Navigate to="/signup" />;
+  return userInfo.isAuthenticated ? children : <Navigate to="/" />;
 }
 
 PrivateRoute.propTypes = {

@@ -13,15 +13,12 @@ createRoot(document.getElementById("root")).render(
       autoClose={4000}
       hideProgressBar={false}
       newestOnTop={false}
-      closeOnClick={false}
+      closeOnClick
       rtl={false}
       pauseOnFocusLoss
       draggable
       pauseOnHover
       theme="light"
-      transition={Bounce}
-      bodyClassName="toastBody"
     />
-    <ToastContainer />
   </StrictMode>
 );

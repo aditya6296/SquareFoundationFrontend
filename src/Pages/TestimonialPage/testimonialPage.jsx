@@ -112,7 +112,7 @@
 
 // export default TestimonialPage;
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./testimonialPage.module.css";
 import { testmonialCardData } from "./testmonialData.js";
 import FaqPage from "../FaqPage/faqPage.jsx";
@@ -136,6 +136,13 @@ function TestimonialPage() {
         : prevIndex + cardsPerSlide
     );
   };
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     handleNextClick();
+  //   }, 3000);
+  //   return () => clearInterval(interval);
+  // }, [currentIndex]);
 
   return (
     <>

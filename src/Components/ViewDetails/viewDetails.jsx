@@ -1,8 +1,8 @@
 import styles from "./viewDetails.module.css";
-import { ViewDetailsData } from "./viewDetailData.js";
 import { Link } from "react-router";
 import PropTypes from "prop-types";
-const ViewDetails = ({ setIsDetailOpen }) => {
+import { ViewDetailsData } from "./viewDetailData.js";
+const ViewDetails = ({ setIsDetailOpen, scholarshipData }) => {
   const handleViewDetail = () => {
     setIsDetailOpen(false);
   };
@@ -16,16 +16,25 @@ const ViewDetails = ({ setIsDetailOpen }) => {
         >
           clear
         </button>
-        {ViewDetailsData.map((item, index) => (
-          <div key={index}>
-            <h2>{item.heading}</h2>
-            <ul className={styles.itemDetail}>
-              {item.details.map((detail, i) => (
-                <li key={i}>{detail}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <div>
+          <h2>{scholarshipData.title}</h2>
+          <p>{scholarshipData.description}</p>
+        </div>
+        {scholarshipData?.details ? (
+          scholarshipData.details.map((item, index) => (
+            <div key={index}>
+              <h2>{item.heading}</h2>
+              <ul className={styles.itemDetail}>
+                {item.details?.map((detail, i) => (
+                  <li key={i}>{detail}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        ) : (
+          <p>Details not available.</p>
+        )}
+
         <div className={styles.home_page_apply_now}>
           <Link to="#" className={styles.view_detail_apply_now_link}>
             Apply Now
@@ -37,7 +46,8 @@ const ViewDetails = ({ setIsDetailOpen }) => {
 };
 
 ViewDetails.propTypes = {
-  setIsDetailOpen: PropTypes.bool.isRequired,
+  setIsDetailOpen: PropTypes.func.isRequired,
+  scholarshipData: PropTypes.object.isRequired,
 };
 
 export default ViewDetails;

@@ -131,34 +131,21 @@
   font-size: 34px;
 }
 
-/* Scholarship List Header */
 .dashboard_page_scholarship_list_header {
   font-size: 25px;
   font-weight: 900;
 }
-
-/* Scholarship Cards */
-/* .dashboard_page_scholarship_list_card_container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-} */
 
 .dashboard_page_scholarship_list_card {
   max-width: 18.5rem;
   padding: 16px;
   background-color: rgba(247, 248, 249, 1);
   border-radius: 12px;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: transform 0.3s ease-in-out;
   border: 1px solid rgb(158, 160, 162);
-  /* width: 20%; */
-  /* max-width: 15.8rem; */
-  /* gap: 30px; */
 }
 
 .dashboard_page_scholarship_list_card:hover {
@@ -169,7 +156,6 @@
 
 .dashboard_page_scholarship_list_card_img {
   width: 100%;
-  /* max-width: 220px; */
   height: auto;
 }
 
@@ -185,16 +171,13 @@
   color: #333;
   text-justify: inter-word;
   white-space: normal;
-  text-align: justify;
   padding: 10px 0;
 }
 
 .dashboard_page_scholarship_list_card_date {
   font-size: 11px;
   color: #666;
-  margin: 0 6px;
-  text-align: left;
-  text-align: justify;
+  padding: 0 4px;
 }
 
 /* Card Buttons */
@@ -211,6 +194,16 @@
   background-color: rgba(231, 234, 238, 1);
   border: none;
   cursor: pointer;
+  margin-top: 16px;
+}
+
+.dashboard_page_scholarship_list_card_apply_btn {
+  padding: 8px;
+  background-color: rgba(231, 234, 238, 1);
+  border: none;
+  cursor: pointer;
+  background-color: rgba(117, 48, 247, 1);
+  color: white;
 }
 
 .dashboard_page_scholarship_list_card_aaply_btn {
@@ -243,7 +236,7 @@
 }
 
 .model_2 {
-  width: 100%;
+  width: 90%;
   height: 100%;
   border-radius: 20px;
 }
@@ -287,18 +280,101 @@
   .dashboard_aside_container {
     flex-direction: column;
     align-items: center;
+    position: static !important;
+    height: auto; /* ✅ Adjust height based on content */
+    overflow-y: auto;
+  }
+
+  .dashboard_aside_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .dashboard_aside_header_name {
+    font-size: 22px; /* ✅ Adjust font size */
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .dashboard_aside_header_logo {
+    width: 25px;
+    height: 25px;
+    /* margin: 0px 0px 0px 0px; */
+  }
+
+  .dashboard_aside_header_down_logo {
+    /* display: flex; */
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 5px; */
+    margin-top: 0;
+  }
+
+  .dashboard_aside_header_down_logo img {
+    width: 30px; /* ✅ Resize decorative lines */
+  }
+
+  .dashboard_aside_header_down_logo span {
+    font-size: 14px; /* ✅ Adjust text size */
+    font-weight: bold;
+  }
+
+  .dashboard_aside_link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  .dashboard_aside_container {
+    flex-direction: column;
+    align-items: center;
   }
 
   .dashboard_aside_link_box {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .dashboard_aside_link {
+    display: flex;
+    flex-direction: row; /* ✅ Keep buttons in one row */
+    align-items: center;
+    gap: 10px;
   }
 
   .dashboard_aside_link_home_btn,
   .dashboard_aside_link_application_btn,
   .dashboard_aside_link_logout_btn {
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
     text-align: center;
+    padding: 8px 12px; /* ✅ Adjust padding for better spacing */
+    gap: 5px; /* ✅ Space between icon and text */
+    font-size: 14px; /* ✅ Adjust font size */
+  }
+
+  .dashboard_aside_link_logout_btn {
+    display: flex;
+    align-items: center;
+  }
+
+  .dashboard_aside_link_svg {
+    width: 18px; /* ✅ Adjust icon size */
+    height: 18px;
   }
 
   .dashboard_page_scholarship_list_card {
@@ -314,8 +390,6 @@
 }
 .container {
   width: 100%;
-  /* max-width: 800px; */
-  margin: 40px auto;
   padding: 0 20px;
   background-color: #f9f9f9;
   border-radius: 12px;
@@ -324,11 +398,11 @@
 
 /* Title */
 .title {
-  text-align: center;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   margin-bottom: 20px;
   color: #333;
+  /* text-align: center; */
 }
 
 /* Table container */
@@ -397,9 +471,9 @@
 
 .form_card_model {
   /* width: 60%; */
-  max-width: 780px;
+  min-width: 820px;
   height: auto;
-  max-height: 80%;
+  max-height: 87%;
   background: white;
   padding: 20px;
   border-radius: 20px;

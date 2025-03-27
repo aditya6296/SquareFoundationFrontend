@@ -44,6 +44,7 @@ const useApplyNow = () => {
     selectedScholarshipId,
     setIsFormOpen,
     checkResultData,
+    
   };
 };
 

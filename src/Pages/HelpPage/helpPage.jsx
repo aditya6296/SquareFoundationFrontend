@@ -34,7 +34,7 @@ function HelpPage() {
               <div className={styles.help_page_first_text_box}>
                 <img src={helpImg5} className={styles.help_page_text_box_png} />
                 <p className={styles.help_page_text_box_para}>
-                  <b>Tailored Matches:</b>Access scholarships that perfectly
+                  <b>Tailored Matches: </b>Access scholarships that perfectly
                   align with your profile,goals,and qualifications.
                 </p>
               </div>
@@ -42,7 +42,7 @@ function HelpPage() {
               <div className={styles.help_page_second_text_box}>
                 <img src={helpImg6} className={styles.help_page_text_box_png} />
                 <p className={styles.help_page_text_box_para}>
-                  <b>Tailored Matches:</b>Access scholarships that perfectly
+                  <b>Tailored Matches: </b> Access scholarships that perfectly
                   align with your profile,goals,and qualifications.
                 </p>
               </div>
@@ -50,7 +50,7 @@ function HelpPage() {
               <div className={styles.help_page_third_text_box}>
                 <img src={helpImg7} className={styles.help_page_text_box_png} />
                 <p className={styles.help_page_text_box_para}>
-                  <b>Tailored Matches:</b>Access scholarships that perfectly
+                  <b>Tailored Matches: </b>Access scholarships that perfectly
                   align with your profile,goals,and qualifications.
                 </p>
               </div>
@@ -61,7 +61,7 @@ function HelpPage() {
                   className={styles.help_page_text_box_png}
                 />
                 <p className={styles.help_page_text_box_para}>
-                  <b>Tailored Matches:</b>Access scholarships that perfectly
+                  <b>Tailored Matches: </b>Access scholarships that perfectly
                   align with your profile,goals,and qualifications.
                 </p>
               </div>

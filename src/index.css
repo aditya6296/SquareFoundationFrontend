@@ -5,9 +5,46 @@
   font-family: "Inter", sans-serif;
 }
 
-/* React tostify css */
+.Toastify__toast-icon svg {
+  fill: white !important; 
+}
 
-/* .toastBody {
-  font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
-  font-size: 1.7rem;
-} */
+.Toastify__toast {
+  border-radius: 8px !important;
+  font-weight: bold !important;
+  padding: 12px !important;
+}
+
+.Toastify__toast-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.Toastify__progress-bar {
+  background-color: rgb(172, 159, 159) !important;
+}
+
+/* Success Toast - Green */
+.Toastify__toast--success {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+
+/* Error Toast - Red */
+.Toastify__toast--error {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
+/* Warning Toast - Yellow */
+.Toastify__toast--warning {
+  background-color: #ffc107 !important;
+  color: black !important;
+}
+
+/* Info Toast - Blue */
+.Toastify__toast--info {
+  background-color: #17a2b8 !important;
+  color: white !important;
+}

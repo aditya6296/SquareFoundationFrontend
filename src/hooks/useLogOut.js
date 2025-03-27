@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
-const useLogOut = () => {
+const useLogOut = (setUserInfo) => {
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -22,12 +22,11 @@ const useLogOut = () => {
       }
 
       const logoutResponse = await response.json();
-      toast.success(logoutResponse.message || "Logout Successfully!");
-      navigate("/");
-
-      // if (response.status === 200) {
-      //   alert("Logout SuccessFully !");
-      // }
+      if (response.status === 200) {
+        setUserInfo({ isAuthenticated: false, email: "" });
+        toast.success(logoutResponse.message || "Logout Successfully!");
+        navigate("/");
+      }
     } catch (err) {
       console.log(err, "Internal Server error");
       console.log(err.message);

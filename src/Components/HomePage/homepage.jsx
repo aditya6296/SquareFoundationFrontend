@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import HomeBigStar from "../../assets/homepage_big_star.svg";
 import HomeMiniStar from "../../assets/homepage_mini_star.svg";
 import HomeArrow from "../../assets/homepage_arrow_svg.svg";
+import { toast } from "react-toastify";
 function Homepage({ userInfo, manageLogin }) {
   return (
     <>
@@ -38,9 +39,21 @@ function Homepage({ userInfo, manageLogin }) {
               </p>
             </div>
             <div className={styles.home_page_apply_now}>
-              <Link to="#" className={styles.home_page_apply_now_link}>
-                Apply Now
-              </Link>
+              {userInfo.isAuthenticated === true ? (
+                <Link
+                  to="/dashboard"
+                  className={styles.home_page_apply_now_link}
+                >
+                  Apply Now
+                </Link>
+              ) : (
+                <button
+                  onClick={() => toast.warn("Please login first !")}
+                  className={styles.home_page_apply_now_link}
+                >
+                  Apply Now
+                </button>
+              )}
             </div>
           </div>
           <div className={styles.home_page_star_1_svg}>

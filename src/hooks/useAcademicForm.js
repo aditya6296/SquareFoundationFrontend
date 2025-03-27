@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const useAcademicForm = () => {
   const academicDetail = async (formAcademicData, scholarshipId) => {
     console.log("formAcademicData at useAcademic : ", formAcademicData);
@@ -18,6 +20,7 @@ const useAcademicForm = () => {
       console.log("formAcademicData- is--- ✅ ", data);
     } catch (err) {
       console.log(err, " and ", err.message);
+      
     }
   };
   return { academicDetail };

@@ -185,6 +185,8 @@
   background-color: rgba(117, 48, 247, 1);
   padding: 12px 52px;
   color: white;
+  cursor: pointer;
+  border: none;
 }
 
 .home_page_mini_star_svg_show {
@@ -213,15 +215,28 @@
   width: 180px;
   border-radius: 12px;
   object-fit: cover;
-  /* position: absolute; */
+  /* position: relative; */
 }
 
 .home_page_scroll_down {
   height: 30px;
   width: 180px;
   border-radius: 8px;
-  /* position: absolute; */
+  position: relative;
+  margin-top: -34px;
+  display: block;
+  object-fit: cover;
 }
+
+/* .home_page_scroll_down {
+  height: 40px;
+  width: 210px;
+  display: block;
+  object-fit: cover;
+  bottom: 60px;
+  border-radius: 12px;
+} */
+/* position: absolute; */
 
 /* Responsive Design */
 

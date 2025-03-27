@@ -38,19 +38,19 @@ function App() {
             path="/"
             element={<Homepage userInfo={userInfo} manageLogin={manageLogin} />}
           />
-          <Route path="/signup" element={<Signup />} />
           <Route path="/detail" element={<ViewDetails />} />
           <Route
             path="/dashboard"
             element={
               <PrivateRoute userInfo={userInfo} isLoading={isLoading}>
-                <DashBoard />
+                <DashBoard setUserInfo={setUserInfo} />
               </PrivateRoute>
             }
           />
           <Route path="/dashboard/form" element={<ScholarshipForm />} />
           <Route path="/form" element={<DashForm />} />
           <Route path="/success" element={<SuccessFully />} />
+          {/* <Route path="/signup" element={<Signup />} /> */}
           {/* <Route path="/login" element={<Login manageLogin={manageLogin} />} /> */}
           {/* <Route path="/dash/status" element={<ScholarshipStatus />} /> */}
           <Route
