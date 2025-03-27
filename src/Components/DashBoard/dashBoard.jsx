@@ -201,7 +201,7 @@ function DashBoard({ setUserInfo }) {
                         }
                       >
                         <img
-                          src={elem.url || { scholarshipLogo }} // Default image if URL is missing
+                          src={elem.url || scholarshipLogo} // Default image if URL is missing
                           alt="Scholarship"
                           className={
                             styles.dashboard_page_scholarship_list_card_img
