@@ -13,6 +13,7 @@ import homeIcon from "/src/assets/dashboard_images/home.svg";
 import applicationIcon from "/src/assets/dashboard_images/application.svg";
 import logoutIcon from "/src/assets/dashboard_images/logout.svg";
 import scholarshipLogo from "/src/assets/dashboard_images/cardimg.svg";
+import SuccessFully from "../SuccessPopUp/successFully.jsx";
 
 // import useCheckForm from "../../hooks/useCheckForm.js";
 // import { dashData } from "./dashboardData.js";
@@ -23,6 +24,7 @@ function DashBoard({ setUserInfo }) {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedScholarship, setSelectedScholarship] = useState(null);
   const [applyData, setApplyData] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { scholarshipData, isLoading } = useScholarship();
   const {
@@ -321,14 +323,33 @@ function DashBoard({ setUserInfo }) {
         ) : (
           ""
         )}
-        {isFormOpen && (
+        {isFormOpen && !isSubmitted && (
           <div className={styles.form_model}>
             <div className={styles.form_card_model}>
               <DashForm
                 setIsFormOpen={setIsFormOpen}
+                isFormOpen={isFormOpen}
+                setIsSubmitted={setIsSubmitted}
                 scholarshipId={selectedScholarshipId}
                 checkResultData={checkResultData}
               />
+            </div>
+          </div>
+        )}
+        {/* {isSubmitted && (
+          <div className={styles.form_model}>
+            <div className={styles.form_card_model}>
+              <DashForm
+                isSubmitted={isSubmitted}
+                setIsSubmitted={setIsSubmitted}
+              />
+            </div>
+          </div>
+        )} */}
+        {isSubmitted && (
+          <div className={styles.submit_model}>
+            <div className={styles.submit_card_model}>
+              <SuccessFully setIsSubmitted={setIsSubmitted} />
             </div>
           </div>
         )}

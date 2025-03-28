@@ -5,20 +5,30 @@ import PropTypes from "prop-types";
 import useAcademicForm from "../../hooks/useAcademicForm";
 import useUploadFile from "../../hooks/useUploadFile";
 import { toast } from "react-toastify";
-// import useReviewForm from "../../hooks/useReviewForm";
+import useReviewForm from "../../hooks/useReviewForm";
+import { FadeLoader } from "react-spinners";
+// import SuccessFully from "../SuccessPopUp/successFully";
 
-function DashForm({ setIsFormOpen, scholarshipId, checkResultData }) {
+function DashForm({
+  setIsFormOpen,
+  isFormOpen,
+  scholarshipId,
+  checkResultData,
+  setIsSubmitted,
+}) {
   const [step, setStep] = useState(1);
   const [personalData, setPersonalData] = useState({});
   const [stepPage, setStepPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+
   const totalSteps = 4; // Total steps in the form
   const { personalDetail, getPersonalDetail } = usePersonalForm();
   const { academicDetail } = useAcademicForm();
-  const { uploadFile } = useUploadFile();
-  // const { reviewForm } = useReviewForm(scholarshipId);
-
+  const { uploadFile } = useUploadFile(setIsLoading);
+  const { reviewForm, reviewData } = useReviewForm(scholarshipId);
   const [academicData, setAcademicData] = useState({});
   const [isFile, setIsFile] = useState({});
+  // const [isSubmitted, setIsSubmitted] = useState(false);
   // Options based on education level
   const fieldOptions = {
     Matric: ["10th"],
@@ -223,7 +233,6 @@ function DashForm({ setIsFormOpen, scholarshipId, checkResultData }) {
       const data = await getPersonalDetail();
       if (data) setPersonalData(data);
       if (data) setAcademicData(data);
-      // if (data) setIsFile(data);
 
       // ✅ Ensure uploaded files are set correctly
       if (data.uploadDocuments) {
@@ -300,6 +309,14 @@ function DashForm({ setIsFormOpen, scholarshipId, checkResultData }) {
   const handleUpload = async (e) => {
     e.preventDefault();
 
+    // Debugging
+    console.log("setIsLoading inside handleUpload:", setIsLoading);
+
+    if (typeof setIsLoading !== "function") {
+      console.error("setIsLoading is not a function!", setIsLoading);
+      return;
+    }
+
     if (
       !isFile.photo ||
       !isFile.identityProof ||
@@ -310,6 +327,8 @@ function DashForm({ setIsFormOpen, scholarshipId, checkResultData }) {
       return;
     }
 
+    setIsLoading(true);
+
     const formData = new FormData();
     Object.entries(isFile).forEach(([key, file]) => {
       formData.append(key, file);
@@ -317,10 +336,13 @@ function DashForm({ setIsFormOpen, scholarshipId, checkResultData }) {
 
     try {
       await uploadFile(scholarshipId, formData);
+      await reviewForm();
       nextStep();
     } catch (error) {
       toast.error("File upload failed. Please try again.");
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -565,150 +587,121 @@ function DashForm({ setIsFormOpen, scholarshipId, checkResultData }) {
         )}
 
         {step === 3 && (
-          <form className={styles.form} onSubmit={handleUpload}>
-            <div>
-              {" "}
-              <button
-                onClick={() => setIsFormOpen(false)}
-                className={styles.close_btn}
-              >
-                Close
-              </button>
-            </div>
-            <h2>Upload Documents</h2>
-            <div className={styles.input_file_container}>
-              <div className={styles.input_box}>
-                <p>Upload your Photo</p>
-                <input
-                  type="file"
-                  name="photo"
-                  onChange={handleChange}
-                  required={!isFile.photo}
-                />
-                <div>
-                  {isFile.photo ? (
-                    <p>📌 File Uploaded: {isFile.photo.fileName}</p>
+          <>
+            {isLoading && (
+              <div className={styles.loading_overlay}>
+                <FadeLoader size={50} color="white" />
+              </div>
+            )}
+            <form className={styles.form} onSubmit={handleUpload}>
+              <div>
+                {" "}
+                <button
+                  onClick={() => setIsFormOpen(false)}
+                  className={styles.close_btn}
+                >
+                  Close
+                </button>
+              </div>
+              <h2>Upload Documents</h2>
+              <div className={styles.input_file_container}>
+                <div className={styles.input_box}>
+                  <p>Upload your Photo</p>
+                  <input
+                    type="file"
+                    name="photo"
+                    onChange={handleChange}
+                    required={!isFile.photo}
+                  />
+                  <div>
+                    {isFile.photo ? (
+                      <p>📌 File Uploaded: {isFile.photo.fileName}</p>
+                    ) : (
+                      <p>⚠️ No file uploaded</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className={styles.input_box}>
+                  <p>Upload your Identity Proof</p>
+                  <input
+                    type="file"
+                    name="identityProof"
+                    onChange={handleChange}
+                    required={
+                      !isFile.identityProof || isFile.identityProof.length === 0
+                    }
+                  />
+
+                  {isFile.identityProof ? (
+                    <p>📌 File Uploaded: {isFile.identityProof.fileName}</p>
+                  ) : (
+                    <p>⚠️ No file uploaded</p>
+                  )}
+                </div>
+                <div className={styles.input_box}>
+                  <p>Upload your academic Transcript</p>
+                  <input
+                    type="file"
+                    name="academicTranscript"
+                    onChange={handleChange}
+                    required={
+                      !isFile.academicTranscript ||
+                      isFile.academicTranscript.length === 0
+                    }
+                  />
+
+                  {isFile.academicTranscript ? (
+                    <p>
+                      📌 File Uploaded: {isFile.academicTranscript.fileName}
+                    </p>
+                  ) : (
+                    <p>⚠️ No file uploaded</p>
+                  )}
+                </div>
+
+                <div className={styles.input_box}>
+                  <p>Upload your personal Statement</p>
+                  <input
+                    type="file"
+                    name="personalStatement"
+                    onChange={handleChange}
+                    required={
+                      !isFile.personalStatement ||
+                      isFile.personalStatement.length === 0
+                    }
+                  />
+
+                  {isFile.personalStatement ? (
+                    <p>📌 File Uploaded: {isFile.personalStatement.fileName}</p>
                   ) : (
                     <p>⚠️ No file uploaded</p>
                   )}
                 </div>
               </div>
-              {/* new */}
-              {/* <div className={styles.input_box}>
-                <p>Upload your Photo</p>
-                <input
-                  type="file"
-                  name="photo"
-                  onChange={handleChange}
-                  required={!isFile.photo || isFile.photo.length === 0}
-                />
-                <div>
-                  {isFile.photo && isFile.photo.length > 0 ? (
-                    isFile.photo.map((file, index) => (
-                      <p key={index}>📌 File Uploaded: {file.fileName}</p>
-                    ))
-                  ) : (
-                    <p>⚠️ No file uploaded</p>
-                  )}
-                </div>
-              </div> */}
 
-              <div className={styles.input_box}>
-                <p>Upload your Identity Proof</p>
-                <input
-                  type="file"
-                  name="identityProof"
-                  onChange={handleChange}
-                  required={
-                    !isFile.identityProof || isFile.identityProof.length === 0
-                  }
-                />
-
-                {isFile.identityProof ? (
-                  <p>📌 File Uploaded: {isFile.identityProof.fileName}</p>
-                ) : (
-                  <p>⚠️ No file uploaded</p>
-                )}
-
-                {/* {isFile.identityProof && isFile.identityProof.length > 0 ? (
-                  isFile.identityProof.map((file, index) => (
-                    <p key={index}>📌 File Uploaded: {file.fileName}</p>
-                  ))
-                ) : (
-                  <p>⚠️ No file uploaded</p>
-                )} */}
+              <div className={styles.buttonGroup}>
+                <button
+                  type="button"
+                  onClick={prevStep}
+                  className={styles.prev_btn}
+                >
+                  Previous
+                </button>
+                <button
+                  type="submit"
+                  className={styles.save_AndNext_Btn}
+                  disabled={isLoading}
+                >
+                  {/* Save & Next */}
+                  {isLoading ? "Uploading..." : "Save & Next"}
+                </button>
               </div>
-              <div className={styles.input_box}>
-                <p>Upload your academic Transcript</p>
-                <input
-                  type="file"
-                  name="academicTranscript"
-                  onChange={handleChange}
-                  required={
-                    !isFile.academicTranscript ||
-                    isFile.academicTranscript.length === 0
-                  }
-                />
-
-                {isFile.academicTranscript ? (
-                  <p>📌 File Uploaded: {isFile.academicTranscript.fileName}</p>
-                ) : (
-                  <p>⚠️ No file uploaded</p>
-                )}
-                {/* {isFile.academicTranscript &&
-                isFile.academicTranscript.length > 0 ? (
-                  isFile.academicTranscript.map((file, index) => (
-                    <p key={index}>📌 File Uploaded: {file.fileName}</p>
-                  ))
-                ) : (
-                  <p>⚠️ No file uploaded</p>
-                )} */}
-              </div>
-
-              <div className={styles.input_box}>
-                <p>Upload your personal Statement</p>
-                <input
-                  type="file"
-                  name="personalStatement"
-                  onChange={handleChange}
-                  required={
-                    !isFile.personalStatement ||
-                    isFile.personalStatement.length === 0
-                  }
-                />
-
-                {isFile.personalStatement ? (
-                  <p>📌 File Uploaded: {isFile.personalStatement.fileName}</p>
-                ) : (
-                  <p>⚠️ No file uploaded</p>
-                )}
-                {/* {isFile.personalStatement &&
-                isFile.personalStatement.length > 0 ? (
-                  isFile.personalStatement.map((file, index) => (
-                    <p key={index}>📌 File Uploaded: {file.fileName}</p>
-                  ))
-                ) : (
-                  <p>⚠️ No file uploaded</p>
-                )} */}
-              </div>
-            </div>
-
-            <div className={styles.buttonGroup}>
-              <button
-                type="button"
-                onClick={prevStep}
-                className={styles.prev_btn}
-              >
-                Previous
-              </button>
-              <button type="submit" className={styles.save_AndNext_Btn}>
-                Save & Next
-              </button>
-            </div>
-          </form>
+            </form>
+          </>
         )}
 
-        {step === 4 && (
+        {step === 4 && isFormOpen && (
           <div>
             <div>
               {" "}
@@ -724,57 +717,44 @@ function DashForm({ setIsFormOpen, scholarshipId, checkResultData }) {
               <div className={styles.review_info}>
                 {" "}
                 <label>name</label>
-                <p>
-                  {/* {checkResultData.data.application[0].personalDetails.name} */}
-                </p>
+                <p>{reviewData.data.application[0].personalDetails.name}</p>
               </div>
               <div className={styles.review_info}>
                 {" "}
                 <label>email</label>
-                <p>
-                  {/* {checkResultData.data.application[0].personalDetails.email} */}
-                </p>
+                <p>{reviewData.data.application[0].personalDetails.email}</p>
               </div>
               <div className={styles.review_info}>
                 <label>phoneNumber</label>
                 <p>
-                  {/* {
-                    checkResultData.data.application[0].personalDetails
-                      .phoneNumber
-                  } */}
+                  {reviewData.data.application[0].personalDetails.phoneNumber}
                 </p>
               </div>
               <div className={styles.review_info}>
                 {" "}
-                {/* <label>DOB</label>
-                <p>{checkResultData.data.application[0].personalDetails.DOB}</p> */}
                 <label>DOB</label>
                 <p>
-                  {/* {
-                    new Date(
-                      checkResultData.data.application[0].personalDetails.DOB
-                    )
+                  {
+                    new Date(reviewData.data.application[0].personalDetails.DOB)
                       .toISOString()
                       .split("T")[0]
-                  } */}
+                  }
                 </p>
               </div>
 
               <div className={styles.review_info}>
                 <label>gender</label>
 
-                <p>
-                  {/* {checkResultData.data.application[0].personalDetails.gender} */}
-                </p>
+                <p>{reviewData.data.application[0].personalDetails.gender}</p>
               </div>
               <div className={styles.review_info}>
                 {" "}
                 <label>materialStatus</label>
                 <p>
-                  {/* {
-                    checkResultData.data.application[0].personalDetails
+                  {
+                    reviewData.data.application[0].personalDetails
                       .materialStatus
-                  } */}
+                  }
                 </p>
               </div>
             </div>
@@ -782,65 +762,60 @@ function DashForm({ setIsFormOpen, scholarshipId, checkResultData }) {
               <div className={styles.review_info}>
                 <label>Institution Name</label>
                 <p>
-                  {/* {
-                    checkResultData.data.application[0].academicInformation
+                  {
+                    reviewData.data.application[0].academicInformation
                       .collegeName
-                  } */}
+                  }
                 </p>
               </div>
               <div className={styles.review_info}>
                 <label>educationLevel</label>
                 <p>
-                  {/* {
-                    checkResultData.data.application[0].academicInformation
+                  {
+                    reviewData.data.application[0].academicInformation
                       .educationLevel
-                  } */}
+                  }
                 </p>
               </div>
               <div className={styles.review_info}>
                 <label>fieldOfStudy</label>
                 <p>
-                  {/* {
-                    checkResultData.data.application[0].academicInformation
+                  {
+                    reviewData.data.application[0].academicInformation
                       .fieldOfStudy
-                  } */}
+                  }
                 </p>
               </div>
               <div className={styles.review_info}>
                 <label>GPA / Percentage</label>
 
-                <p>
-                  {/* {checkResultData.data.application[0].academicInformation.GPA} */}
-                </p>
+                <p>{reviewData.data.application[0].academicInformation.GPA}</p>
               </div>
               <div className={styles.review_info}>
                 <label>yearOfStudy</label>
 
                 <p>
-                  {/* {
-                    checkResultData.data.application[0].academicInformation
+                  {
+                    reviewData.data.application[0].academicInformation
                       .yearOfStudy
-                  } */}
+                  }
                 </p>
               </div>
               <div className={styles.review_info}>
                 <label>passOutYear</label>
 
                 <p>
-                  {/* {
-                    checkResultData.data.application[0].academicInformation
+                  {
+                    reviewData.data.application[0].academicInformation
                       .passOutYear
-                  } */}
+                  }
                 </p>
               </div>
               <div className={styles.review_info}>
                 <label>reason</label>
 
                 <p>
-                  {/* {
-                    checkResultData.data.application[0].academicInformation
-                      .reason
-                  } */}
+                  {reviewData.data.application[0].academicInformation.reason}
                 </p>
               </div>
             </div>
@@ -871,7 +846,12 @@ function DashForm({ setIsFormOpen, scholarshipId, checkResultData }) {
                 Previous
               </button>
               <button
-                onClick={() => alert("Form Submitted!")}
+                // onClick={() => alert("Form Submitted!")}
+                // onClick={() => setIsSubmitted(true)}
+                onClick={() => {
+                  setIsFormOpen(false); // Close the popup
+                  setTimeout(() => setIsSubmitted(true), 100);
+                }}
                 className={styles.save_AndNext_Btn}
               >
                 Submit
@@ -887,6 +867,8 @@ function DashForm({ setIsFormOpen, scholarshipId, checkResultData }) {
 DashForm.propTypes = {
   setIsFormOpen: PropTypes.func.isRequired,
   scholarshipId: PropTypes.string.isRequired,
+  isFormOpen: PropTypes.bool.isRequired,
+  setIsSubmitted: PropTypes.bool.isRequired,
   checkResultData: PropTypes.shape({
     data: PropTypes.shape({
       application: PropTypes.arrayOf(

@@ -6,10 +6,10 @@ import Signup from "../SignUp/signup";
 import Login from "../LoginPage/login";
 import logoImg from "/src/assets/line.svg";
 
-function Navbar({ userInfo, manageLogin }) {
+function Navbar({ userInfo, manageLogin, isLoginOpen, setisLoginOpen }) {
   const { isAuthenticated, email } = userInfo;
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-  const [isLoginOpen, setisLoginOpen] = useState(false);
+  // const [isLoginOpen, setisLoginOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSignUpOpen = () => {
@@ -136,6 +136,8 @@ function Navbar({ userInfo, manageLogin }) {
 Navbar.propTypes = {
   userInfo: PropTypes.object.isRequired,
   manageLogin: PropTypes.func.isRequired,
+  isLoginOpen: PropTypes.bool.isRequired,
+  setisLoginOpen: PropTypes.bool.isRequired,
 };
 
 export default Navbar;

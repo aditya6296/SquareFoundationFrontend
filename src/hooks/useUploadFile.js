@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-const useUploadFile = () => {
+const useUploadFile = (setIsLoading) => {
   const uploadFile = async (scholarshipId, formData) => {
     console.log("fileupload data id  =====: ", scholarshipId);
     // console.log("fileupload data =====: ", formData.get("file"));
@@ -9,8 +9,10 @@ const useUploadFile = () => {
       console.log(pair[0], pair[1]);
     }
 
+    setIsLoading(true);
+
     try {
-      const response = fetch(
+      const response = await fetch(
         `${
           import.meta.env.VITE_API_BASE_URL
         }/api/v1/application-form/upload/${scholarshipId}`,
@@ -21,12 +23,14 @@ const useUploadFile = () => {
         }
       );
       const data = await response.json();
-      if (response.status(201)) {
+      if (response.status === 201) {
         toast.success("File uploaded successfully!");
         console.log("Upload response:", data);
       }
     } catch (err) {
       console.log(err, " and error.message", err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
   return { uploadFile };

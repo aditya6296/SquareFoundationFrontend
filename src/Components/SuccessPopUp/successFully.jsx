@@ -1,10 +1,13 @@
 import styles from "./successfully.module.css";
 import { Link } from "react-router";
-function SuccessFully() {
+function SuccessFully({ setIsSubmitted }) {
   return (
     <>
       <div className={styles.success_main_container}>
-        <button className={`material-icons ${styles.clearButton}`}>
+        <button
+          className={`material-icons ${styles.clearButton}`}
+          onClick={() => setIsSubmitted(false)}
+        >
           clear
         </button>
         <div className={styles.success_right_img_container}>
@@ -19,7 +22,12 @@ function SuccessFully() {
             <p>Thank you for applying for the Bright Futures Scholarship.</p>
           </div>
           <div className={styles.success_text_go_back_link}>
-            <Link to="#">Go Back</Link>
+            <button
+              onClick={() => setIsSubmitted(false)}
+              className={styles.go_back_btn}
+            >
+              Go Back
+            </button>
           </div>
         </div>
       </div>

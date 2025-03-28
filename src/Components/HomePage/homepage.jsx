@@ -9,10 +9,15 @@ import HomeBigStar from "../../assets/homepage_big_star.svg";
 import HomeMiniStar from "../../assets/homepage_mini_star.svg";
 import HomeArrow from "../../assets/homepage_arrow_svg.svg";
 import { toast } from "react-toastify";
-function Homepage({ userInfo, manageLogin }) {
+function Homepage({ userInfo, manageLogin, isLoginOpen, setisLoginOpen }) {
   return (
     <>
-      <Navbar userInfo={userInfo} manageLogin={manageLogin} />
+      <Navbar
+        userInfo={userInfo}
+        manageLogin={manageLogin}
+        isLoginOpen={isLoginOpen}
+        setisLoginOpen={setisLoginOpen}
+      />
       <div className={styles.home_page_main_container}>
         <div className={styles.home_page_main_header_text_container}>
           <div className={styles.home_page_arrow_svg}>
@@ -48,7 +53,10 @@ function Homepage({ userInfo, manageLogin }) {
                 </Link>
               ) : (
                 <button
-                  onClick={() => toast.warn("Please login first !")}
+                  onClick={() => {
+                    setisLoginOpen(true);
+                    toast.warn("Please login !");
+                  }}
                   className={styles.home_page_apply_now_link}
                 >
                   Apply Now
@@ -93,6 +101,8 @@ function Homepage({ userInfo, manageLogin }) {
 Homepage.propTypes = {
   userInfo: PropTypes.object.isRequired,
   manageLogin: PropTypes.func.isRequired,
+  isLoginOpen: PropTypes.bool.isRequired,
+  setisLoginOpen: PropTypes.bool.isRequired,
 };
 
 export default Homepage;

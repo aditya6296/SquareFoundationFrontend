@@ -1,6 +1,6 @@
 .success_main_container {
   height: auto;
-  max-width: 90%;
+  max-width: 100%;
   border: 1px solid rgb(188, 187, 187);
   border-radius: 20px;
   text-align: center;
@@ -18,11 +18,11 @@
 }
 
 /* Desktop screens */
-@media screen and (min-width: 1024px) {
+/* @media screen and (min-width: 1024px) {
   .success_main_container {
     max-width: 45%;
   }
-}
+} */
 
 .clearButton {
   float: right;
@@ -40,6 +40,13 @@
 .success_right_img {
   height: 100px;
   width: 100px;
+}
+
+.go_back_btn {
+  padding: 4px;
+  border: none;
+  background: none;
+  color: dodgerblue;
 }
 
 @media screen and (min-width: 768px) {

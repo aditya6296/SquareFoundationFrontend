@@ -16,6 +16,7 @@ import PrivateRoute from "./hooks/privateRoute";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoginOpen, setisLoginOpen] = useState(false);
   const [userInfo, setUserInfo] = useState({
     isAuthenticated: false,
     email: "",
@@ -36,7 +37,14 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Homepage userInfo={userInfo} manageLogin={manageLogin} />}
+            element={
+              <Homepage
+                userInfo={userInfo}
+                manageLogin={manageLogin}
+                isLoginOpen={isLoginOpen}
+                setisLoginOpen={setisLoginOpen}
+              />
+            }
           />
           <Route path="/detail" element={<ViewDetails />} />
           <Route
