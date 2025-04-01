@@ -9,6 +9,8 @@ import rightSvg from "../../assets/signup_images/signup_pass_right.svg";
 import wrongSvg from "../../assets/signup_images/signup_pass_wrong.svg";
 import visibilitySvg from "../../assets/signup_images/visibility_on.svg";
 import unVisibleSvg from "../../assets/signup_images/visibility_off.svg";
+import rightSignSvg from "/src/assets/signup_images/signup_right.svg";
+import signUpFemaleSvg from "/src/assets/signup_images/signup_women_image.svg";
 
 // import SendverifyEmail from "../../hooks/verifyEmail";
 
@@ -25,22 +27,6 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
     }
     return () => clearTimeout(timer);
   }, [resendTimer]);
-
-  // useEffect(() => {
-  //   const storedEmail = localStorage.getItem("otpSent");
-  //   if (storedEmail) {
-  //     setEmail(storedEmail);
-  //     setIsOtpSent(true);
-  //   }
-  // }, []);
-
-  // const [validPassword, setValidPassword] = useState(false);
-  // const [passwordLengthMatch, setPasswordLengthMatch] = useState(false);
-  // const [upperPasswordMatch, setUpperPasswordMatch] = useState(false);
-  // const [lowerPasswordMatch, setLowerPasswordMatch] = useState(false);
-  // const [numberPasswordMatch, setNumberPasswordMatch] = useState(false);
-  // const [specialCharPasswordMatch, setSpecialCharPasswordMatch] =
-  //   useState(false);
 
   const [passwordCriteria, setPasswordCriteria] = useState({
     validPassword: false,
@@ -73,7 +59,6 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isOtp, setIsOtp] = useState("");
   const [otpSentEmail, setOtpSentEmail] = useState(""); // for check already sent
-  // const [isResend, setIsResend] = useState(false);
 
   const { registerUser } = useSignUp({ handleSignUpSuccess });
   const { sendOtp, loading } = useOtp({ setIsOtpSent });
@@ -190,7 +175,7 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
               <div className={styles.signup_page_image_title_first_container}>
                 {" "}
                 <img
-                  src="/src/assets/signup_images/signup_right.svg"
+                  src={rightSignSvg}
                   className={styles.signup_page_image_right_svg}
                 />
                 <p>1 Lakh Student Register</p>
@@ -198,7 +183,7 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
               <div className={styles.signup_page_image_title_first_container}>
                 {" "}
                 <img
-                  src="/src/assets/signup_images/signup_right.svg"
+                  src={rightSignSvg}
                   className={styles.signup_page_image_right_svg}
                 />
                 <p>96% Scholarship Approved</p>
@@ -206,7 +191,7 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
               <div className={styles.signup_page_image_title_first_container}>
                 {" "}
                 <img
-                  src="/src/assets/signup_images/signup_right.svg"
+                  src={rightSignSvg}
                   className={styles.signup_page_image_right_svg}
                 />
                 <p>70+ No Of Scholarsips</p>
@@ -214,10 +199,7 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
             </div>
           </div>
           <div className={styles.signup_page_women_image_container}>
-            <img
-              src="/src/assets/signup_images/signup_women_image.svg"
-              className={styles.signup_page_image}
-            />
+            <img src={signUpFemaleSvg} className={styles.signup_page_image} />
           </div>
         </div>
 
@@ -340,7 +322,7 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
               ) : (
                 <button
                   className={styles.signup_page_form_btn}
-                  onClick={() => setResendTimer(120)}
+                  onClick={() => setResendTimer(60)}
                 >
                   Send OTP
                 </button>

@@ -8,7 +8,10 @@ import { toast } from "react-toastify";
 import useForgotPassword from "../../hooks/useForgotPassword";
 import rightSvg from "../../assets/signup_images/signup_pass_right.svg";
 import wrongSvg from "../../assets/signup_images/signup_pass_wrong.svg";
-
+import visibleSvg from "/src/assets/signup_images/visibility_on.svg";
+import hideSvg from "/src/assets/signup_images/visibility_off.svg";
+import rightSignSvg from "/src/assets/signup_images/signup_right.svg";
+import loginFemaleSvg from "/src/assets/signup_images/signup_women_image.svg";
 function Login({
   manageLogin,
   setisLoginOpen,
@@ -145,7 +148,7 @@ function Login({
               <div className={styles.signup_page_image_title_first_container}>
                 {" "}
                 <img
-                  src="/src/assets/signup_images/signup_right.svg"
+                  src={rightSignSvg}
                   className={styles.signup_page_image_right_svg}
                 />
                 <p>1 Lakh Student Register</p>
@@ -153,7 +156,7 @@ function Login({
               <div className={styles.signup_page_image_title_first_container}>
                 {" "}
                 <img
-                  src="/src/assets/signup_images/signup_right.svg"
+                  src={rightSignSvg}
                   className={styles.signup_page_image_right_svg}
                 />
                 <p>96% Scholarship Approved</p>
@@ -161,7 +164,7 @@ function Login({
               <div className={styles.signup_page_image_title_first_container}>
                 {" "}
                 <img
-                  src="/src/assets/signup_images/signup_right.svg"
+                  src={rightSignSvg}
                   className={styles.signup_page_image_right_svg}
                 />
                 <p>70+ No Of Scholarsips</p>
@@ -169,10 +172,7 @@ function Login({
             </div>
           </div>
           <div className={styles.login_page_women_image_container}>
-            <img
-              src="/src/assets/signup_images/signup_women_image.svg"
-              className={styles.signup_page_image}
-            />
+            <img src={loginFemaleSvg} className={styles.signup_page_image} />
           </div>
         </div>
 
@@ -231,15 +231,9 @@ function Login({
                         onClick={() => setVisible(!visible)}
                       >
                         {visible ? (
-                          <img
-                            src="/src/assets/signup_images/visibility_on.svg"
-                            alt="Show"
-                          />
+                          <img src={visibleSvg} alt="Show" />
                         ) : (
-                          <img
-                            src="/src/assets/signup_images/visibility_off.svg"
-                            alt="Hide"
-                          />
+                          <img src={hideSvg} alt="Hide" />
                         )}
                       </button>
                     </div>
@@ -265,14 +259,24 @@ function Login({
                 )}
               </>
               {isOtpSent ? (
-                <button type="button" onClick={handleCreateNewPassword} className={styles.create_pass_btn}>
+                <button
+                  type="button"
+                  onClick={handleCreateNewPassword}
+                  className={styles.create_pass_btn}
+                >
                   Create Password
                 </button>
               ) : (
-                <button type="submit" className={styles.create_pass_btn}>Reset Password</button>
+                <button type="submit" className={styles.create_pass_btn}>
+                  Reset Password
+                </button>
               )}
               {/* <button type="submit">Reset Password</button> */}
-              <button type="button" onClick={() => setIsForgotPassword(false)} className={styles.back_login_btn}>
+              <button
+                type="button"
+                onClick={() => setIsForgotPassword(false)}
+                className={styles.back_login_btn}
+              >
                 Back to Login
               </button>
             </form>
@@ -337,7 +341,7 @@ function Login({
                     Forgot Password?
                   </button>
                 </div>
-                <button className={styles.continue_btn}>Countinue</button>
+                <button className={styles.continue_btn}>Continue</button>
                 <div>
                   <p>
                     Don't have an account?

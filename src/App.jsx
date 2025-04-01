@@ -57,7 +57,6 @@ function App() {
           />
           <Route path="/dashboard/form" element={<ScholarshipForm />} />
           <Route path="/form" element={<DashForm />} />
-          <Route path="/success" element={<SuccessFully />} />
           {/* <Route path="/signup" element={<Signup />} /> */}
           {/* <Route path="/login" element={<Login manageLogin={manageLogin} />} /> */}
           {/* <Route path="/dash/status" element={<ScholarshipStatus />} /> */}
