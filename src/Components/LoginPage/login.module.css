@@ -47,11 +47,9 @@
   align-items: center;
 }
 
-.signup_page_image {
-  max-width: 220px;
+.login_page_image {
+  max-width: 240px;
   border-radius: 12px;
-  /* height: 400px; */
-  /* display: none; */
 }
 
 .login_page_form_container {

@@ -44,15 +44,20 @@
 
   .signup_page_women_image_container {
     /* display: block; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .signup_page_image {
-      height: 400px;
+      /* height: 400px;
       width: 220px;
       position: absolute;
       top: 20%;
       right: 50%;
       border-radius: 12px;
       position: fixed;
-      display: none;
+      display: none; */
+      max-width: 220px;
+      border-radius: 12px;
     }
   }
 }

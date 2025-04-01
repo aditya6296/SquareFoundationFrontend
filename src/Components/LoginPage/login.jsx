@@ -172,7 +172,7 @@ function Login({
             </div>
           </div>
           <div className={styles.login_page_women_image_container}>
-            <img src={loginFemaleSvg} className={styles.signup_page_image} />
+            <img src={loginFemaleSvg} className={styles.login_page_image} />
           </div>
         </div>
 
