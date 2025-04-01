@@ -252,11 +252,12 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
                     className={styles.visibilityToggle}
                     onClick={() => setVisible(!visible)}
                   >
-                    {visible ? (
+                    {/* {visible ? (
                       <img src={visibilitySvg} alt="Show" />
                     ) : (
                       <img src={unVisibleSvg} alt="Hide" />
-                    )}
+                    )} */}
+                    {visible ? "👁️" : "👁️‍🗨️"}
                   </button>
                 </div>
               </div>

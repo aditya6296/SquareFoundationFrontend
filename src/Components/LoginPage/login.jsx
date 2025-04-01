@@ -8,10 +8,10 @@ import { toast } from "react-toastify";
 import useForgotPassword from "../../hooks/useForgotPassword";
 import rightSvg from "../../assets/signup_images/signup_pass_right.svg";
 import wrongSvg from "../../assets/signup_images/signup_pass_wrong.svg";
-import visibleSvg from "/src/assets/signup_images/visibility_on.svg";
-import hideSvg from "/src/assets/signup_images/visibility_off.svg";
 import rightSignSvg from "/src/assets/signup_images/signup_right.svg";
 import loginFemaleSvg from "/src/assets/signup_images/signup_women_image.svg";
+import visibleSvg from "/src/assets/signup_images/visibility_on.svg";
+import hideSvg from "/src/assets/signup_images/visibility_off.svg";
 function Login({
   manageLogin,
   setisLoginOpen,
@@ -29,7 +29,10 @@ function Login({
   // const [showLoginPop, setShowLoginPop] = useState(false);
 
   const { sendOtp } = useOtp({ setIsOtpSent });
-  const { forgotCreatePassword } = useForgotPassword({ handleSignUpSuccess });
+  const { forgotCreatePassword } = useForgotPassword({
+    handleSignUpSuccess,
+    setIsForgotPassword,
+  });
 
   // Password criteria
 
@@ -100,6 +103,7 @@ function Login({
     );
     const data = await response.json();
     console.log("chck email data ---->", data);
+    toast.success(data.message);
 
     if (data.exists) {
       sendOtp({ email: forgotPassEmail, isResnd: false });
@@ -227,14 +231,15 @@ function Login({
                       />
                       <button
                         type="button"
-                        className={styles.visibilityToggle}
+                        className={styles.forgotVisibilityToggle}
                         onClick={() => setVisible(!visible)}
                       >
-                        {visible ? (
+                        {/* {visible ? (
                           <img src={visibleSvg} alt="Show" />
                         ) : (
                           <img src={hideSvg} alt="Hide" />
-                        )}
+                        )} */}
+                        {visible ? "👁️" : "👁️‍🗨️"}
                       </button>
                     </div>
 

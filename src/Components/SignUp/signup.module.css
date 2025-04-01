@@ -217,7 +217,7 @@
 .visibilityToggle {
   position: absolute;
   right: 10px;
-  top: 65%;
+  top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;

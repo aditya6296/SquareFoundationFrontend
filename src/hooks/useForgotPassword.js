@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-const useForgotPassword = ({ handleSignUpSuccess }) => {
+const useForgotPassword = ({ handleSignUpSuccess, setIsForgotPassword }) => {
   const forgotCreatePassword = async ({
     email: isEmail,
     otp: newOtp,
@@ -28,6 +28,7 @@ const useForgotPassword = ({ handleSignUpSuccess }) => {
       if (response.ok && data.status === "Success") {
         toast.success("Password Reset Successfully ! Please Login");
         handleSignUpSuccess();
+        setIsForgotPassword(false);
       }
     } catch (err) {
       console.log("forgot-error", err);
