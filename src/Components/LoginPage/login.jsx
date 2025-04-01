@@ -318,7 +318,7 @@ function Login({
                       className={styles.visibilityToggle}
                       onClick={() => setVisible(!visible)}
                     >
-                      {visible ? (
+                      {/* {visible ? (
                         <img
                           src="/src/assets/signup_images/visibility_on.svg"
                           alt="Show"
@@ -328,7 +328,8 @@ function Login({
                           src="/src/assets/signup_images/visibility_off.svg"
                           alt="Hide"
                         />
-                      )}
+                      )} */}
+                      {visible ? "👁️" : "👁️‍🗨️"}
                     </button>
                   </div>
                 </div>
