@@ -4,7 +4,9 @@ const useReviewForm = (scholarshipId) => {
   const reviewForm = async () => {
     try {
       const response = await fetch(
-        `http://localhost:2200/api/v1/application-form/review/${scholarshipId}`,
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/api/v1/application-form/review/${scholarshipId}`,
         {
           method: "GET",
           credentials: "include",

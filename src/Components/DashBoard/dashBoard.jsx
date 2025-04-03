@@ -46,7 +46,7 @@ function DashBoard({ setUserInfo }) {
 
     try {
       const response = await fetch(
-        `http://localhost:2200/api/v1/application-status`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/application-status`,
         {
           method: "GET",
           credentials: "include",
