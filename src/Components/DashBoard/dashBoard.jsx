@@ -15,10 +15,6 @@ import logoutIcon from "/src/assets/dashboard_images/logout.svg";
 import scholarshipLogo from "/src/assets/dashboard_images/cardimg.svg";
 import SuccessFully from "../SuccessPopUp/successFully.jsx";
 
-// import useCheckForm from "../../hooks/useCheckForm.js";
-// import { dashData } from "./dashboardData.js";
-// import logout from "../../hooks/useLogOut.js";
-
 function DashBoard({ setUserInfo }) {
   const [activeTab, setActiveTab] = useState("home");
   const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -34,7 +30,6 @@ function DashBoard({ setUserInfo }) {
     setIsFormOpen,
     checkResultData,
   } = useApplyNow();
-  // console.log("checkResultData to dashboard : ", checkResultData);
   const { logout } = useLogOut(setUserInfo);
 
   const handleHome = () => {
@@ -74,10 +69,6 @@ function DashBoard({ setUserInfo }) {
     }
     console.log("buttom clicked --> ");
   };
-
-  // const handleCheckUserInfo = () => {
-  // const { checkUserForm } = useCheckForm();
-  // };
 
   const handleApplyNow = async (scholarshipId) => {
     try {
@@ -336,16 +327,7 @@ function DashBoard({ setUserInfo }) {
             </div>
           </div>
         )}
-        {/* {isSubmitted && (
-          <div className={styles.form_model}>
-            <div className={styles.form_card_model}>
-              <DashForm
-                isSubmitted={isSubmitted}
-                setIsSubmitted={setIsSubmitted}
-              />
-            </div>
-          </div>
-        )} */}
+
         {isSubmitted && (
           <div className={styles.submit_model}>
             <div className={styles.submit_card_model}>

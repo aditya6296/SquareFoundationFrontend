@@ -7,7 +7,6 @@ import useUploadFile from "../../hooks/useUploadFile";
 import { toast } from "react-toastify";
 import useReviewForm from "../../hooks/useReviewForm";
 import { FadeLoader } from "react-spinners";
-// import SuccessFully from "../SuccessPopUp/successFully";
 
 function DashForm({
   setIsFormOpen,
@@ -28,8 +27,7 @@ function DashForm({
   const { reviewForm, reviewData } = useReviewForm(scholarshipId);
   const [academicData, setAcademicData] = useState({});
   const [isFile, setIsFile] = useState({});
-  // const [isSubmitted, setIsSubmitted] = useState(false);
-  // Options based on education level
+
   const fieldOptions = {
     Matric: ["10th"],
     Intermediate: ["Science", "Commerce", "Arts"],
@@ -62,89 +60,6 @@ function DashForm({
   };
 
   console.log("checkResultData at dashform :", checkResultData);
-  // 🟢 Auto-fill the form when checkResultData is available
-  // useEffect(() => {
-  //   if (
-  //     checkResultData?.data?.application?.[0]?.personalDetails ||
-  //     checkResultData?.data?.application?.[0]?.academicInformation ||
-  //     checkResultData?.data?.application?.[0]?.uploadDocuments
-  //   ) {
-  //     console.log(
-  //       "checkResultData updated: at dashform in useeffect",
-  //       checkResultData.data.application[0].personalDetails.name
-  //     );
-  //     console.log(
-  //       "checkResultData updated: at dashform in useeffect academicInformation ",
-  //       checkResultData.data.application[0].academicInformation.collegeName
-  //     );
-  //     setPersonalData((prev) => ({
-  //       ...prev, //Keeps previous values in case some fields in checkResultData are missing.
-  //       name:
-  //         checkResultData.data.application[0].personalDetails.name || prev.name,
-  //       email:
-  //         checkResultData.data.application[0].personalDetails.email ||
-  //         prev.email,
-  //       phoneNumber:
-  //         checkResultData.data.application[0].personalDetails.phoneNumber ||
-  //         prev.phoneNumber,
-  //       DOB:
-  //         checkResultData.data.application[0].personalDetails.DOB || prev.DOB,
-  //       gender:
-  //         checkResultData.data.application[0].personalDetails.gender ||
-  //         prev.gender,
-  //       materialStatus:
-  //         checkResultData.data.application[0].personalDetails.materialStatus ||
-  //         prev.materialStatus,
-  //     }));
-  //     setAcademicData((prev) => ({
-  //       ...prev,
-  //       collegeName:
-  //         checkResultData.data.application[0].academicInformation.collegeName ||
-  //         prev.collegeName,
-  //       educationLevel:
-  //         checkResultData.data.application[0].academicInformation
-  //           .educationLevel || prev.educationLevel,
-
-  //       fieldOfStudy:
-  //         checkResultData.data.application[0].academicInformation
-  //           .fieldOfStudy || prev.fieldOfStudy,
-
-  //       GPA:
-  //         checkResultData.data.application[0].academicInformation.GPA ||
-  //         prev.GPA,
-
-  //       yearOfStudy:
-  //         checkResultData.data.application[0].academicInformation.yearOfStudy ||
-  //         prev.yearOfStudy,
-
-  //       passOutYear:
-  //         checkResultData.data.application[0].academicInformation.passOutYear ||
-  //         prev.passOutYear,
-
-  //       reason:
-  //         checkResultData.data.application[0].academicInformation.reason ||
-  //         prev.reason,
-  //     }));
-  //     const uploadDocs =
-  //       checkResultData?.data?.application?.[0]?.uploadDocuments ?? {}; // Ensure it's an object
-
-  //     setIsFile((prev) => ({
-  //       ...prev,
-  //       photo: uploadDocs?.photo?.length
-  //         ? uploadDocs.photo[0]
-  //         : prev.photo ?? null,
-  //       identityProof: uploadDocs?.identityDocument?.length
-  //         ? uploadDocs.identityDocument[0]
-  //         : prev.identityProof ?? null,
-  //       academicTranscript: uploadDocs?.academicTranscript?.length
-  //         ? uploadDocs.academicTranscript[0]
-  //         : prev.academicTranscript ?? null,
-  //       personalStatement: uploadDocs?.personalStatement?.length
-  //         ? uploadDocs.personalStatement[0]
-  //         : prev.personalStatement ?? null,
-  //     }));
-  //   }
-  // }, [checkResultData]); // Runs when checkResultData updates
 
   useEffect(() => {
     if (
@@ -412,6 +327,8 @@ function DashForm({
                 placeholder="Phone"
                 value={personalData.phoneNumber || ""}
                 onChange={handleChange}
+                maxLength="10"
+                pattern="[0-9]{10}"
                 required
               />
               <input
@@ -703,6 +620,11 @@ function DashForm({
 
         {step === 4 && isFormOpen && (
           <div>
+            {isLoading && (
+              <div className={styles.loading_overlay}>
+                <FadeLoader size={50} color="white" />
+              </div>
+            )}
             <div>
               {" "}
               <button
@@ -834,27 +756,27 @@ function DashForm({
                 } */}
               </p>
             </div>
-            <div>
-              {/* <input type="checkbox" />
-              <p>
-                I hereby declare that all the information provided is true to
-                the best of my knowladge
-              </p> */}
-            </div>
+
             <div className={styles.buttonGroup}>
               <button onClick={prevStep} className={styles.prev_btn}>
                 Previous
               </button>
               <button
-                // onClick={() => alert("Form Submitted!")}
-                // onClick={() => setIsSubmitted(true)}
                 onClick={() => {
-                  setIsFormOpen(false); // Close the popup
-                  setTimeout(() => setIsSubmitted(true), 100);
+                  setIsLoading(true);
+
+                  setTimeout(() => {
+                    setIsLoading(false); // Stop loader after 3 seconds
+                    setIsFormOpen(false);
+                    setTimeout(() => {
+                      setIsSubmitted(true); // Open new popup
+                    }, 100);
+                  }, 3000);
                 }}
                 className={styles.save_AndNext_Btn}
+                disabled={isLoading}
               >
-                Submit
+                {isLoading ? "Submitting..." : "Submit"}
               </button>
             </div>
           </div>

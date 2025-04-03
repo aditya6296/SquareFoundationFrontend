@@ -43,10 +43,11 @@
 }
 
 .go_back_btn {
-  padding: 4px;
+  padding: 6px;
   border: none;
   background: none;
   color: dodgerblue;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
