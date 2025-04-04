@@ -45,7 +45,6 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
       specialChar: /[@$!%*?&]/.test(password),
     };
     setPasswordCriteria(newCriteria);
-    console.log("validate password ==> ", newCriteria);
   };
 
   const criteriaList = [
@@ -93,29 +92,6 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
     });
 
     setEmail(email);
-
-    // Step 1: Register the user
-    // registerUser({ email, password: isPassword }).then((registerResponse) => {
-    //   console.log(`========== ${registerResponse}`);
-    //   if (registerResponse.status === "Sucsess") {
-    //     // Registration successful, return sendOtp() promise
-    //     return sendOtp({ email })
-    //       .then((otpResponse) => {
-    //         console.log(otpResponse);
-    //       })
-    //       .catch((error) => {
-    //         console.error("Error:", error);
-    //         // alert(error || "An error occurred. Please try again.");
-    //       });
-    //   }
-    // });
-
-    // verifyEmail({
-    //   email,
-    //   password,
-    // });
-
-    // sendOtp({ email, isResnd: false });
   };
 
   const handleVerify = () => {
@@ -131,29 +107,8 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
 
   const handleOtp = (event) => {
     const newOtp = event.target.value;
-    console.log("newOtp", newOtp);
     setIsOtp(newOtp);
   };
-
-  // const handlePassword = (event) => {
-  //   const newPassword = event.target.value;
-  //   console.log(newPassword);
-  //   setIsPassword(newPassword);
-
-  //   const passwordRegex =
-  //     /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  //   setValidPassword(passwordRegex.test(newPassword));
-  //   // /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  //   setUpperPasswordMatch(/[A-Z]/.test(newPassword));
-  //   setLowerPasswordMatch(/[a-z]/.test(newPassword));
-  //   setNumberPasswordMatch(/\d/.test(newPassword));
-  //   setSpecialCharPasswordMatch(/[@$!%*?&]/.test(newPassword));
-
-  //   if (newPassword.lenght != 8) {
-  //     console.log("password must have 8 char =>");
-  //     return;
-  //   }
-  // };
 
   const handleClose = () => {
     setIsSignUpOpen(false);
@@ -252,11 +207,6 @@ function Signup({ setIsSignUpOpen, handleSignUpSuccess }) {
                     className={styles.visibilityToggle}
                     onClick={() => setVisible(!visible)}
                   >
-                    {/* {visible ? (
-                      <img src={visibilitySvg} alt="Show" />
-                    ) : (
-                      <img src={unVisibleSvg} alt="Hide" />
-                    )} */}
                     {visible ? "👁️" : "👁️‍🗨️"}
                   </button>
                 </div>

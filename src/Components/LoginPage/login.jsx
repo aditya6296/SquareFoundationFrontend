@@ -10,8 +10,7 @@ import rightSvg from "../../assets/signup_images/signup_pass_right.svg";
 import wrongSvg from "../../assets/signup_images/signup_pass_wrong.svg";
 import rightSignSvg from "/src/assets/signup_images/signup_right.svg";
 import loginFemaleSvg from "/src/assets/signup_images/signup_women_image.svg";
-import visibleSvg from "/src/assets/signup_images/visibility_on.svg";
-import hideSvg from "/src/assets/signup_images/visibility_off.svg";
+
 function Login({
   manageLogin,
   setisLoginOpen,
@@ -25,8 +24,6 @@ function Login({
   const [newOtp, setNewOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [visible, setVisible] = useState(false);
-
-  // const [showLoginPop, setShowLoginPop] = useState(false);
 
   const { sendOtp } = useOtp({ setIsOtpSent });
   const { forgotCreatePassword } = useForgotPassword({
@@ -85,9 +82,6 @@ function Login({
     e.preventDefault();
     const forgotPassEmail = e.target[0].value;
     console.log("forgotPassEmail", forgotPassEmail);
-    // sendOtp({ email: forgotPassEmail, isResnd: false });
-    // setIsOtpSent(true);
-    // alert("Hi forgot");
 
     const response = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/check-email`,
@@ -102,7 +96,6 @@ function Login({
       }
     );
     const data = await response.json();
-    console.log("chck email data ---->", data);
     toast.success(data.message);
 
     if (data.exists) {
@@ -130,11 +123,6 @@ function Login({
       password: newPassword,
     });
   };
-
-  // const handleResetPaaaword = () => {
-  //   sendOtp({ isEmail, isResnd: false });
-  //   setIsOtpSent(true);
-  // };
 
   return (
     <>
@@ -234,11 +222,6 @@ function Login({
                         className={styles.forgotVisibilityToggle}
                         onClick={() => setVisible(!visible)}
                       >
-                        {/* {visible ? (
-                          <img src={visibleSvg} alt="Show" />
-                        ) : (
-                          <img src={hideSvg} alt="Hide" />
-                        )} */}
                         {visible ? "👁️" : "👁️‍🗨️"}
                       </button>
                     </div>
@@ -276,7 +259,6 @@ function Login({
                   Reset Password
                 </button>
               )}
-              {/* <button type="submit">Reset Password</button> */}
               <button
                 type="button"
                 onClick={() => setIsForgotPassword(false)}
@@ -323,17 +305,6 @@ function Login({
                       className={styles.visibilityToggle}
                       onClick={() => setVisible(!visible)}
                     >
-                      {/* {visible ? (
-                        <img
-                          src="/src/assets/signup_images/visibility_on.svg"
-                          alt="Show"
-                        />
-                      ) : (
-                        <img
-                          src="/src/assets/signup_images/visibility_off.svg"
-                          alt="Hide"
-                        />
-                      )} */}
                       {visible ? "👁️" : "👁️‍🗨️"}
                     </button>
                   </div>
@@ -373,6 +344,7 @@ Login.propTypes = {
   setisLoginOpen: PropTypes.func.isRequired,
   setUserInfo: PropTypes.func.isRequired,
   setIsSignUpOpen: PropTypes.func.isRequired,
+  handleSignUpSuccess: PropTypes.func.isRequired,
 };
 
 export default Login;

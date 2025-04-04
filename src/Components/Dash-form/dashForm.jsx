@@ -144,12 +144,11 @@ function DashForm({
   const prevStep = async (e) => {
     e.preventDefault();
     if (step === 2) {
-      console.log("📌 Fetching details for scholarshipID:"); // ✅
       const data = await getPersonalDetail();
       if (data) setPersonalData(data);
       if (data) setAcademicData(data);
 
-      // ✅ Ensure uploaded files are set correctly
+      // uploaded files are set correctly
       if (data.uploadDocuments) {
         setIsFile({
           photo: data.uploadDocuments.photo || null,
@@ -169,14 +168,10 @@ function DashForm({
 
   // Update input values dynamically
   const handleChange = (e) => {
-    // setPersonalData({ ...personalData, [e.target.name]: e.target.value });
-
     const { name, value, type, files } = e.target;
     if (type === "file") {
       console.log("files data == : ", files);
       setIsFile((prev) => ({ ...prev, [name]: files[0] }));
-      // setIsFile(files[0]);
-      console.log("isfiles data == : ", isFile);
     } else {
       setPersonalData((prev) => ({ ...prev, [name]: value }));
       setAcademicData((prev) => ({ ...prev, [name]: value }));
@@ -194,8 +189,6 @@ function DashForm({
       materialStatus: e.target[6].value,
     };
 
-    console.log(formPersonalData);
-    console.log("Submitting with Scholarship ID:", scholarshipId);
     await personalDetail(formPersonalData, scholarshipId);
 
     nextStep();
@@ -203,7 +196,6 @@ function DashForm({
 
   const handleAcademicDetails = async (e) => {
     e.preventDefault();
-    console.log("📌 e.target[1]:", e.target[1]);
 
     const formAcademicData = {
       collegeName: e.target[1].value,
@@ -214,9 +206,7 @@ function DashForm({
       passOutYear: e.target[6].value,
       reason: e.target[7].value,
     };
-    console.log("collegeName at dashform :", formAcademicData.collegeName);
-    console.log("yearOfStudy at dashform :", formAcademicData.yearOfStudy);
-    console.log("📌 Submitted Academic Data:", formAcademicData);
+
     await academicDetail(formAcademicData, scholarshipId);
     nextStep();
   };
@@ -228,7 +218,6 @@ function DashForm({
     console.log("setIsLoading inside handleUpload:", setIsLoading);
 
     if (typeof setIsLoading !== "function") {
-      console.error("setIsLoading is not a function!", setIsLoading);
       return;
     }
 
@@ -411,41 +400,18 @@ function DashForm({
                   </option>
                 ))}
               </select>
-
-              {/* old */}
-              {/* <select
-                name="educationLevel"
-                className={styles.educationLevel_dropdown}
-                value={academicData.educationLevel || ""}
-                // onChange={(e) => {
-                //   handleChange(e);
-                //   handleEducationLevelChange(e);
-                // }}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select Current Education Level</option>
-                {Object.keys(fieldOptions).map((level) => (
-                  <option key={level}>{level}</option>
-                ))}
-              </select> */}
             </div>
             <div className={styles.input_container}>
-              {console.log("academicData :", academicData)}
               <select
                 name="fieldOfStudy"
                 className={styles.educationLevel_dropdown}
                 value={academicData.fieldOfStudy || ""}
                 onChange={handleChange}
-                // disabled={!educationLevel} // Disable if no education level is selected
                 disabled={!academicData.educationLevel}
                 required
               >
                 <option value="">Select Field Of Study</option>
-                {/* {(academicData.educationLevel &&
-                  fieldOptions[academicData.educationLevel].map((field) => (
-                    <option key={field}>{field}</option>
-                  ))) } */}
+
                 {fieldOptions[academicData.educationLevel]?.map((field) => (
                   <option key={field}>{field}</option>
                 )) || <option disabled>No options available</option>}

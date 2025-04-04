@@ -1,5 +1,5 @@
 import styles from "./navbar.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import Signup from "../SignUp/signup";
@@ -9,8 +9,6 @@ import logoImg from "/src/assets/line.svg";
 function Navbar({ userInfo, manageLogin, isLoginOpen, setisLoginOpen }) {
   const { isAuthenticated, email } = userInfo;
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-  // const [isLoginOpen, setisLoginOpen] = useState(false);
-  const navigate = useNavigate();
 
   const handleSignUpOpen = () => {
     setIsSignUpOpen(true);
@@ -18,21 +16,12 @@ function Navbar({ userInfo, manageLogin, isLoginOpen, setisLoginOpen }) {
 
   const handleLoginOpen = () => {
     setisLoginOpen(true);
-    // navigate("/login");
   };
 
   const handleSignUpSuccess = () => {
     setIsSignUpOpen(false); // Close the signup popup
     setisLoginOpen(true); // Open the login popup
   };
-
-  // if (isSignUpOpen) {
-  //   document.body.style.overflow = "hidden"; // Disable scrolling
-  //   document.body.style.height = "100vh"; // Prevents height expansion
-  // } else {
-  //   document.body.style.overflow = "auto"; // Enable scrolling
-  //   document.body.style.height = "auto";
-  // }
 
   if (isSignUpOpen || isLoginOpen) {
     document.body.style.overflow = "hidden";

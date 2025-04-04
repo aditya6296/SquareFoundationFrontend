@@ -2,17 +2,13 @@ import { BrowserRouter, Link, Route, Routes } from "react-router";
 
 import "./App.css";
 import Homepage from "./Components/HomePage/homepage";
-import Login from "./Components/LoginPage/login";
-import Signup from "./Components/SignUp/signup";
 import ViewDetails from "./Components/ViewDetails/viewDetails";
 import DashBoard from "./Components/DashBoard/dashBoard";
-import SuccessFully from "./Components/SuccessPopUp/successFully";
 import { useState } from "react";
 import ScholarshipForm from "./Components/Scholarship_Form/ScholarshipForm";
 import useIsAuthorized from "./hooks/useIsAuthurized";
 import DashForm from "./Components/Dash-form/dashForm";
 import PrivateRoute from "./hooks/privateRoute";
-// import ScholarshipStatus from "./Components/Dash_application_status/ScholarshipStatus";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -57,9 +53,7 @@ function App() {
           />
           <Route path="/dashboard/form" element={<ScholarshipForm />} />
           <Route path="/form" element={<DashForm />} />
-          {/* <Route path="/signup" element={<Signup />} /> */}
-          {/* <Route path="/login" element={<Login manageLogin={manageLogin} />} /> */}
-          {/* <Route path="/dash/status" element={<ScholarshipStatus />} /> */}
+
           <Route
             path="*"
             element={

@@ -49,7 +49,6 @@ function DashBoard({ setUserInfo }) {
       );
 
       const appliedData = await response.json();
-      console.log("Application Status Result :", appliedData.AppliedData);
       setApplyData(appliedData.AppliedData);
     } catch (err) {
       console.log(err);
@@ -67,7 +66,6 @@ function DashBoard({ setUserInfo }) {
     } catch (error) {
       console.error("Logout failed:", error);
     }
-    console.log("buttom clicked --> ");
   };
 
   const handleApplyNow = async (scholarshipId) => {
@@ -187,14 +185,13 @@ function DashBoard({ setUserInfo }) {
                       className={styles.dashboard_page_scholarship_list_card}
                       key={elem.id}
                     >
-                      {/* <p>ID: {elem.scholarshipId}</p> */}
                       <div
                         className={
                           styles.dashboard_page_scholarship_list_card_img
                         }
                       >
                         <img
-                          src={elem.url || scholarshipLogo} // Default image if URL is missing
+                          src={elem.url || scholarshipLogo}
                           alt="Scholarship"
                           className={
                             styles.dashboard_page_scholarship_list_card_img
@@ -256,14 +253,12 @@ function DashBoard({ setUserInfo }) {
                           className={
                             styles.dashboard_page_scholarship_list_card_apply_btn
                           }
-                          // onClick={() => setIsFormOpen(true)} // You can open the form when clicked
                           onClick={() => handleApplyNow(elem.scholarshipId)}
                         >
                           Apply Now
                         </button>
                       </div>
                     </div>
-                    // </div>
                   ))
                 )}
               </div>
