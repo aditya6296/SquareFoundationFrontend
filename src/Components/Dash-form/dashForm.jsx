@@ -422,6 +422,9 @@ function DashForm({
                 placeholder="GPA / Percentage"
                 value={academicData.GPA || ""}
                 onChange={handleChange}
+                min="0"
+                max="100"
+                step="0.01"
                 required
               />
             </div>

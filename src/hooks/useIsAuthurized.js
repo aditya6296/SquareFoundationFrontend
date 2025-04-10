@@ -1,25 +1,6 @@
 import { useEffect } from "react";
 
 const useIsAuthorized = ({ setUserInfo, setIsLoading }) => {
-  // const getIsAuthorized = async () => {
-  //   const res = await fetch(
-  //     `${import.meta.env.VITE_API_BASE_URL}/api/v1/isAuthenticated`,
-  //     {
-  //       credentials: "include",
-  //     }
-  //   );
-  //   const resObj = await res.json();
-  //   if (res.status === 200 && resObj.isAuthenticated === true) {
-  //     setUserInfo({
-  //       isAuthenticated: true,
-  //     });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getIsAuthorized();
-  // }, []);
-
   useEffect(() => {
     const getIsAuthorized = async () => {
       try {
@@ -43,8 +24,8 @@ const useIsAuthorized = ({ setUserInfo, setIsLoading }) => {
       }
     };
 
-    getIsAuthorized(); // ✅ Function is only created & used inside useEffect
-  }, []); // ✅ No unnecessary dependencies
+    getIsAuthorized();
+  }, []);
 };
 
 export default useIsAuthorized;

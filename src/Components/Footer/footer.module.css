@@ -206,3 +206,8 @@
     font-size: 13px;
   }
 }
+
+.admin_link {
+  color: white;
+  text-decoration: none;
+}

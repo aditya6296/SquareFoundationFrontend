@@ -115,7 +115,10 @@ function Footer() {
           <p>
             {" "}
             © {new Date().getFullYear()} Square Foundation | All rights
-            reserved.
+            reserved.{" "}
+            <a href="/admin/login" className={styles.admin_link}>
+              Admin Login
+            </a>
           </p>
         </div>
       </footer>

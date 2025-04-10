@@ -112,7 +112,7 @@
 
 // export default TestimonialPage;
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./testimonialPage.module.css";
 import { testmonialCardData } from "./testmonialData.js";
 import FaqPage from "../FaqPage/faqPage.jsx";
@@ -120,6 +120,7 @@ import FaqPage from "../FaqPage/faqPage.jsx";
 function TestimonialPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsPerSlide = 2;
+  const sliderRef = useRef(null);
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) =>
@@ -136,6 +137,13 @@ function TestimonialPage() {
         : prevIndex + cardsPerSlide
     );
   };
+
+  // useEffect(() => {
+  //   if (sliderRef.current) {
+  //     const cardWidth = sliderRef.current.children[0].offsetWidth + 20; // card width + gap
+  //     sliderRef.current.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+  //   }
+  // }, [currentIndex]);
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -165,7 +173,7 @@ function TestimonialPage() {
           </div>
         </div>
         <div className={styles.testimonial_page_show_container}>
-          <div className={styles.testimonial_page_card_wrapper}>
+          <div className={styles.testimonial_page_card_wrapper} ref={sliderRef}>
             {testmonialCardData
               .slice(currentIndex, currentIndex + cardsPerSlide)
               .map((item) => (

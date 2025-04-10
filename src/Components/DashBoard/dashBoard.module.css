@@ -1,26 +1,20 @@
-/* second */
-
 /* 🟣 Dashboard Main Container */
 .dashboard_main_container {
   display: flex;
   height: 100vh;
   width: 100%;
-  overflow: hidden; /* Prevent scrolling of the whole page */
+  overflow: hidden;
 }
 
 /* 🟣 Sidebar */
 .dashboard_aside_container {
   height: 100vh;
-  /* width: 260px; */
-  /* width: 20%; */
-  /* width: 400px; */
   background-color: rgba(245, 242, 255, 1);
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease-in-out;
-  position: sticky; /* Keep sidebar fixed */
-  top: 0; /* Stick to the top */
-  /* overflow: hidden;  */
+  position: sticky;
+  top: 0;
 }
 
 .dashboard_aside_header {
@@ -84,7 +78,6 @@
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   color: black;
-  /* padding: 10px 56px; */
 }
 .dashboard_aside_link_home_btn,
 .dashboard_aside_link_application_btn,
@@ -223,7 +216,7 @@
 /* Model Pop-UP */
 
 .view_model {
-  position: fixed; /* Covers the full screen */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -281,7 +274,7 @@
     flex-direction: column;
     align-items: center;
     position: static !important;
-    height: auto; /* ✅ Adjust height based on content */
+    height: auto;
     overflow-y: auto;
   }
 
@@ -294,7 +287,7 @@
   }
 
   .dashboard_aside_header_name {
-    font-size: 22px; /* ✅ Adjust font size */
+    font-size: 22px;
     align-items: center;
     justify-content: center;
     gap: 5px;
@@ -303,24 +296,20 @@
   .dashboard_aside_header_logo {
     width: 25px;
     height: 25px;
-    /* margin: 0px 0px 0px 0px; */
   }
 
   .dashboard_aside_header_down_logo {
-    /* display: flex; */
-    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
-    /* margin-top: 5px; */
     margin-top: 0;
   }
 
   .dashboard_aside_header_down_logo img {
-    width: 30px; /* ✅ Resize decorative lines */
+    width: 30px;
   }
 
   .dashboard_aside_header_down_logo span {
-    font-size: 14px; /* ✅ Adjust text size */
+    font-size: 14px;
     font-weight: bold;
   }
 
@@ -349,7 +338,7 @@
 
   .dashboard_aside_link {
     display: flex;
-    flex-direction: row; /* ✅ Keep buttons in one row */
+    flex-direction: row;
     align-items: center;
     gap: 10px;
   }
@@ -362,9 +351,9 @@
     justify-content: center;
     width: auto;
     text-align: center;
-    padding: 8px 12px; /* ✅ Adjust padding for better spacing */
-    gap: 5px; /* ✅ Space between icon and text */
-    font-size: 14px; /* ✅ Adjust font size */
+    padding: 8px 12px;
+    gap: 5px;
+    font-size: 14px;
   }
 
   .dashboard_aside_link_logout_btn {
@@ -470,8 +459,7 @@
 }
 
 .form_card_model {
-  /* width: 60%; */
-  min-width: 820px;
+  max-width: 820px;
   height: auto;
   max-height: 87%;
   background: white;
@@ -498,17 +486,27 @@
   z-index: 1000;
 }
 .submit_card_model {
-  /* width: 60%; */
   min-width: 820px;
   height: auto;
   max-height: 87%;
-  /* background: white; */
   padding: 20px;
   border-radius: 20px;
-  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); */
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   overflow-y: auto;
+}
+
+.appliedBtn {
+  background-color: #38843a;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  cursor: default;
+  transition: all 0.3s ease;
+  position: relative;
+  &:hover {
+    background-color: #16a34a;
+  }
 }

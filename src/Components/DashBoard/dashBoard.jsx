@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./dashBoard.module.css";
 import { Link } from "react-router-dom";
 import ViewDetails from "../ViewDetails/viewDetails.jsx";
@@ -36,9 +36,26 @@ function DashBoard({ setUserInfo }) {
     setActiveTab("home");
   };
 
-  const handleApplication = async () => {
-    setActiveTab("application");
+  // const handleApplication = async () => {
+  //   setActiveTab("application");
 
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_API_BASE_URL}/api/v1/application-status`,
+  //       {
+  //         method: "GET",
+  //         credentials: "include",
+  //       }
+  //     );
+
+  //     const appliedData = await response.json();
+  //     setApplyData(appliedData.AppliedData);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const fetchApplicationData = async () => {
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/application-status`,
@@ -47,13 +64,25 @@ function DashBoard({ setUserInfo }) {
           credentials: "include",
         }
       );
-
       const appliedData = await response.json();
       setApplyData(appliedData.AppliedData);
     } catch (err) {
       console.log(err);
     }
   };
+
+  const handleApplication = async () => {
+    setActiveTab("application");
+    await fetchApplicationData();
+  };
+
+  useEffect(() => {
+    fetchApplicationData();
+  }, []);
+
+  useEffect(() => {
+    console.log("applyData:", applyData); // 👈 Add this to inspect
+  }, [applyData]);
 
   const handleDetail = (scholarship) => {
     setSelectedScholarship(scholarship);
@@ -72,6 +101,7 @@ function DashBoard({ setUserInfo }) {
     try {
       await applyNow(scholarshipId);
       setIsFormOpen(true);
+      await fetchApplicationData(); // ⬅️ This updates the state!
     } catch (error) {
       console.error("Error applying:", error);
       toast.error("Failed to apply. Please try again.");
@@ -248,7 +278,7 @@ function DashBoard({ setUserInfo }) {
                           View Details
                         </button>
 
-                        <button
+                        {/* <button
                           to="/form"
                           className={
                             styles.dashboard_page_scholarship_list_card_apply_btn
@@ -256,7 +286,25 @@ function DashBoard({ setUserInfo }) {
                           onClick={() => handleApplyNow(elem.scholarshipId)}
                         >
                           Apply Now
-                        </button>
+                        </button> */}
+                        {applyData.some(
+                          (data) =>
+                            data.application[0]?.applicationId ===
+                            elem.scholarshipId
+                        ) ? (
+                          <button className={styles.appliedBtn} disabled>
+                            Applied
+                          </button>
+                        ) : (
+                          <button
+                            className={
+                              styles.dashboard_page_scholarship_list_card_apply_btn
+                            }
+                            onClick={() => handleApplyNow(elem.scholarshipId)}
+                          >
+                            Apply Now
+                          </button>
+                        )}
                       </div>
                     </div>
                   ))
